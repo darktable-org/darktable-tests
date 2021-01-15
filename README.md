@@ -8,14 +8,16 @@ This repository hosts the darktable integration tests.
 
 # Structure
 
-images/    : a directory containing test images
+```
+images/     : a directory containing test images
 
-run.sh     : main driver
+run.sh      : main driver
 
-deltae     : python script to compute a delta-E between 2 images
-             expected.jpg and output.jpg
+deltae      : python script to compute a delta-E between 2 images
+              expected.jpg and output.jpg
 
 nnnn-name/  : tests
+```
 
 Needed tools : zopflipng
 

@@ -24,7 +24,9 @@ Needed tools : zopflipng
 
 1. Create a new directory
 
+```
    <nnnn>-<meaningful name>
+```
 
 2. Start darktable, open one test image (or add a new one if needed)
 
@@ -32,7 +34,7 @@ Needed tools : zopflipng
 
 4. Copy the resulting .xmp into <nnnn>-<meaningful name>
 
-   And rename it <meaningful name>.xmp
+   And rename it ```<meaningful name>.xmp```
 
 5. Do a first run of the test to get the expected output
 
@@ -82,7 +84,9 @@ Test 0001-exposure
 
 1. Create a new directory
 
+```
    <nnnn>-<meaningful name>
+```
 
 2. Create a file named test.sh into this directory
 

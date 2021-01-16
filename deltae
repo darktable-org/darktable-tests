@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Requires:
-#   python3-opencv
+#   python3-imageio
 #   python3-numpy
 #   python3-colour (recent version needed, see below):
 #      pip3 install colour-science
@@ -10,10 +10,8 @@
 MAX_DELTA_E = 2.3
 MAX_AVG_DELTA_E = MAX_DELTA_E / 3.
 
-import cv2
 import colour
 import numpy
-import os
 import sys
 
 if "delta_E" not in dir(colour):
@@ -23,11 +21,13 @@ if "delta_E" not in dir(colour):
 expected = sys.argv[1]
 output = sys.argv[2]
 
-expected_rgb = cv2.imread(expected)
-output_rgb = cv2.imread(output)
+expected_rgb = colour.read_image(expected, method="Imageio")
+output_rgb = colour.read_image(output, method="Imageio")
 
-expected_lab = cv2.cvtColor(expected_rgb, cv2.COLOR_RGB2Lab)
-output_lab = cv2.cvtColor(output_rgb, cv2.COLOR_RGB2Lab)
+expected_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(expected_rgb,
+                                                    chromatic_adaptation_method="Bradford"))
+output_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(output_rgb,
+                                                  chromatic_adaptation_method="Bradford"))
 
 delta_E = colour.delta_E(expected_lab, output_lab, method="CIE 2000")
 

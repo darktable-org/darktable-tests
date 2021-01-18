@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
 # Requires:
-#   python3-imageio
-#   python3-numpy
 #   python3-colour (recent version needed, see below):
 #      pip3 install colour-science
 

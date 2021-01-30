@@ -21,7 +21,7 @@ CDPATH=
 
 CLI=${DARKTABLE_CLI:-darktable-cli}
 TEST_IMAGES=$PWD/images
-
+LOG=$(pwd)/test-$(date +"%Y%m%d-%H%m%S").log
 TESTS=""
 TEST_COUNT=0
 TEST_ERROR=0
@@ -29,6 +29,12 @@ COMPARE=$(which compare)
 DO_OPENCL=yes
 DO_DELTAE=yes
 DO_FAST_FAIL=no
+
+# echo on console and write to log file
+function e()
+{
+    echo "$*" | tee -a $LOG
+}
 
 [ -z $(which $CLI) ] && echo Make sure $CLI is in the path && exit 1
 
@@ -67,7 +73,7 @@ done
 [ -z "$TESTS" ] && TESTS="$(ls -d [0-9]*)"
 
 for dir in $TESTS; do
-    echo Test $dir
+    e Test $dir
     TEST_COUNT=$((TEST_COUNT + 1))
 
     if [ -f $dir/test.sh ]; then
@@ -77,9 +83,9 @@ for dir in $TESTS; do
         )
 
         if [ $? = 0 ]; then
-            echo "  OK"
+            e "  OK"
         else
-            echo "  FAILS: specific test"
+            e "  FAILS: specific test"
             TEST_ERROR=$((TEST_ERROR + 1))
         fi
 
@@ -96,13 +102,13 @@ for dir in $TESTS; do
             TEST=${dir:5}
 
             [ ! -f $TEST.xmp ] &&
-                echo missing $dir.xmp && exit 1
+                e missing $dir.xmp && exit 1
 
-            [ ! -f expected.png ] && echo "      missing expected.png"
+            [ ! -f expected.png ] && e "      missing expected.png"
 
             IMAGE=$(grep DerivedFrom $TEST.xmp | cut -d'"' -f2)
 
-            echo "      Image $IMAGE"
+            e "      Image $IMAGE"
 
             # Remove previous output and diff if any
 
@@ -151,13 +157,13 @@ for dir in $TESTS; do
                     diffcount="$($COMPARE output.png output-cl.png -metric ae diff-cl.png 2>&1 )"
 
                     if [ $? -ne 0 ]; then
-                        echo "      CPU & GPU version differ by ${diffcount} pixels"
+                        e "      CPU & GPU version differ by ${diffcount} pixels"
                     fi
                 fi
 
                 if [ $DO_DELTAE == yes ]; then
                     if [ -f expected.png ]; then
-                        ../deltae expected.png output.png
+                        ../deltae expected.png output.png | tee -a $LOG
                     else
                         false
                     fi
@@ -165,23 +171,23 @@ for dir in $TESTS; do
                     res=$?
 
                     if [ $res -lt 2 ]; then
-                        echo "  OK"
+                        e "  OK"
                         if [ $res = 1 ]; then
                             diffcount="$($COMPARE expected.png output.png -metric ae diff-ok.png 2>&1 )"
                         fi
                         res=0
 
                     else
-                        echo "  FAILS: image visually changed"
+                        e "  FAILS: image visually changed"
                         if [ ! -z $COMPARE -a -f expected.png ]; then
                             diffcount="$($COMPARE expected.png output.png -metric ae diff.png 2>&1 )"
-                            echo "         see diff.png for visual difference"
-			    echo "         (${diffcount} pixels changed)"
+                            e "         see diff.png for visual difference"
+			    e "         (${diffcount} pixels changed)"
                         fi
                     fi
                 else
                     if [ -z $COMPARE ]; then
-                        echo "no delta-e mode : required compare tool not found."
+                        e "no delta-e mode : required compare tool not found."
                         res=1
                     else
                         diffcount="$($COMPARE expected.png output.png -metric ae diff-ok.png 2>&1 )"
@@ -194,22 +200,22 @@ for dir in $TESTS; do
                         fi
 
                         if [[ $diffcount -lt 2000 ]]; then
-                            echo "      Light check : OK"
+                            e "      Light check : OK"
                             res=0
                         else
-                            echo "      Light check : NOK"
+                            e "      Light check : NOK"
                             res=1
                         fi
                     fi
                 fi
             else
-                echo "  FAILS : darktable-cli errored"
+                e "  FAILS : darktable-cli errored"
                 res=1
             fi
 
             if [ ! -f expected.png ]; then
-                echo "  copy output.png to expected.png"
-                echo "  optimize size of expected.png"
+                e "  copy output.png to expected.png"
+                e "  optimize size of expected.png"
 
                 if [ -z $(which zopflipng) ]; then
                     echo
@@ -219,8 +225,8 @@ for dir in $TESTS; do
 
                 zopflipng output.png expected.png 1> /dev/null 2>&1
 
-                echo "  check that expected.png is correct:"
-                echo "  \$ eog $(basename $PWD)/expected.png"
+                e "  check that expected.png is correct:"
+                e "  \$ eog $(basename $PWD)/expected.png"
             fi
 
             exit $res
@@ -233,9 +239,9 @@ for dir in $TESTS; do
         fi
     fi
 
-    echo
+    e
 done
 
-echo
-echo "Total test $TEST_COUNT"
-echo "Errors     $TEST_ERROR"
+e "Total test $TEST_COUNT"
+e "Errors     $TEST_ERROR"
+echo "see $(basename $LOG)"

@@ -21,7 +21,7 @@ CDPATH=
 
 CLI=${DARKTABLE_CLI:-darktable-cli}
 TEST_IMAGES=$PWD/images
-LOG=$(pwd)/test-$(date +"%Y%m%d-%H%m%S").log
+LOG=$(pwd)/test-$(date +"%Y%m%d-%H%M%S").log
 TESTS=""
 TEST_COUNT=0
 TEST_ERROR=0

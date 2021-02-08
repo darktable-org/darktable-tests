@@ -3,6 +3,7 @@
 # Requires:
 #   python3-colour (recent version needed, see below):
 #      pip3 install colour-science
+#   python3-numpy
 
 # Maximum delta allowed, above this value the difference can be detected
 MAX_DELTA_E = 2.3

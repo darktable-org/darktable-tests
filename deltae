@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 
 # Requires:
-#   python3-imageio
 #   python3-scipy >= 1.1.0
 #   python3-six
+#   python3-imageio
+#     or install the latest from PyPi if not provided as system package:
+#       pip3 install imageio
 #   python3-colour-science >= 0.3.14
-#      or install the latest from PyPi if not provided as system package:
-#      pip3 install colour-science
+#     or install the latest from PyPi if not provided as system package:
+#       pip3 install colour-science
 
 # Maximum delta allowed, above this value the difference can be detected
 MAX_DELTA_E = 2.3

@@ -3,6 +3,7 @@
 # Requires:
 #   python3-scipy >= 1.1.0
 #   python3-six
+#   python3-pillow (or python3-Pillow, or python3-pil)
 #   python3-imageio
 #     or install the latest from PyPi if not provided as system package:
 #       pip3 install imageio

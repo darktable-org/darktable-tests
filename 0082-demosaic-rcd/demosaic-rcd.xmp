@@ -9,8 +9,8 @@
    exif:DateTimeOriginal="2007:09:11 13:53:33"
    xmp:Rating="2"
    xmpMM:DerivedFrom="mire1.cr2"
-   darktable:import_timestamp="1611115256"
-   darktable:change_timestamp="1611115420"
+   darktable:import_timestamp="1618663026"
+   darktable:change_timestamp="1618663037"
    darktable:export_timestamp="-1"
    darktable:print_timestamp="-1"
    darktable:xmp_version="4"
@@ -18,8 +18,8 @@
    darktable:auto_presets_applied="1"
    darktable:history_end="11"
    darktable:iop_order_version="2"
-   darktable:history_auto_hash="3126345bb1b82ada50adc89e78a1452d"
-   darktable:history_current_hash="e2e0deabd97dedba6e0fbab132c5ba7d">
+   darktable:history_auto_hash="686e3fe1b0ab807d7c9b0ece2df097eb"
+   darktable:history_current_hash="da87d221fd9f7175dc3b46869caee827">
    <darktable:masks_history>
     <rdf:Seq/>
    </darktable:masks_history>
@@ -37,26 +37,36 @@
       darktable:blendop_params="gz14eJxjYIAACQYYOOHEgAYY0QVwggZ7CB6pfNoAAEkgGQQ="/>
      <rdf:li
       darktable:num="1"
-      darktable:operation="colorin"
+      darktable:operation="demosaic"
       darktable:enabled="1"
-      darktable:modversion="6"
-      darktable:params="gz27eJzjZoCADR6LmBlGwYgHLAPtgFEwICAh62ggdz0DgwIwAQAA1xcEOw=="
+      darktable:modversion="4"
+      darktable:params="00000000000000000000000005000000000000009a99193e"
       darktable:multi_name=""
       darktable:multi_priority="0"
       darktable:blendop_version="10"
       darktable:blendop_params="gz14eJxjYIAACQYYOOHEgAYY0QVwggZ7CB6pfNoAAEkgGQQ="/>
      <rdf:li
       darktable:num="2"
-      darktable:operation="colorout"
+      darktable:operation="colorin"
       darktable:enabled="1"
-      darktable:modversion="5"
-      darktable:params="gz08eJxjZCAOGCg+YCZSKVZQEHGWIv3DFTTMDAGHy4R718G0wm9GC+56BgaHOCUWapi/gHUCE9hcMQgtMOU8PB5A9ggwQdgAXCcNOQ=="
+      darktable:modversion="7"
+      darktable:params="gz48eJzjZhgFowABWAbaAaNgwAEAOQAAEA=="
       darktable:multi_name=""
       darktable:multi_priority="0"
       darktable:blendop_version="10"
       darktable:blendop_params="gz14eJxjYIAACQYYOOHEgAYY0QVwggZ7CB6pfNoAAEkgGQQ="/>
      <rdf:li
       darktable:num="3"
+      darktable:operation="colorout"
+      darktable:enabled="1"
+      darktable:modversion="5"
+      darktable:params="gz35eJxjZBgFo4CBAQAEEAAC"
+      darktable:multi_name=""
+      darktable:multi_priority="0"
+      darktable:blendop_version="10"
+      darktable:blendop_params="gz14eJxjYIAACQYYOOHEgAYY0QVwggZ7CB6pfNoAAEkgGQQ="/>
+     <rdf:li
+      darktable:num="4"
       darktable:operation="gamma"
       darktable:enabled="1"
       darktable:modversion="1"
@@ -66,21 +76,11 @@
       darktable:blendop_version="10"
       darktable:blendop_params="gz14eJxjYIAACQYYOOHEgAYY0QVwggZ7CB6pfNoAAEkgGQQ="/>
      <rdf:li
-      darktable:num="4"
+      darktable:num="5"
       darktable:operation="flip"
       darktable:enabled="1"
       darktable:modversion="2"
       darktable:params="ffffffff"
-      darktable:multi_name=""
-      darktable:multi_priority="0"
-      darktable:blendop_version="10"
-      darktable:blendop_params="gz14eJxjYIAACQYYOOHEgAYY0QVwggZ7CB6pfNoAAEkgGQQ="/>
-     <rdf:li
-      darktable:num="5"
-      darktable:operation="demosaic"
-      darktable:enabled="1"
-      darktable:modversion="3"
-      darktable:params="0000000000000000000000000500000000000000"
       darktable:multi_name=""
       darktable:multi_priority="0"
       darktable:blendop_version="10"
@@ -97,26 +97,16 @@
       darktable:blendop_params="gz10eJxjYGBgYAFiCQYYOOHEgAYY0QVwggZ7CB6pfOygYtaVAyCMi08IAAB5xiOg"/>
      <rdf:li
       darktable:num="7"
-      darktable:operation="exposure"
-      darktable:enabled="0"
-      darktable:modversion="6"
-      darktable:params="00000000000080b90000003f00004842000080c001000000"
-      darktable:multi_name=""
-      darktable:multi_priority="0"
-      darktable:blendop_version="10"
-      darktable:blendop_params="gz13eJxjYGBgYAZiCQYYOOHEgAYY0QVwggZ7CB6pfNoAAE4AGQc="/>
-     <rdf:li
-      darktable:num="8"
       darktable:operation="channelmixerrgb"
       darktable:enabled="0"
       darktable:modversion="3"
-      darktable:params="gz04eJxjYGiwZ8AAxIqRD5igmAXKt5l42E4of68dU2GpK8guRqAYCAMAkWEHfg=="
+      darktable:params="gz04eJxjYGiwZ8AAxIqRD5igmAWIGYHYZuJhO6H8vXZMhaWuILsYoeIAkX0Hfw=="
       darktable:multi_name=""
       darktable:multi_priority="0"
       darktable:blendop_version="10"
       darktable:blendop_params="gz10eJxjYGBgYAFiCQYYOOHEgAYY0QVwggZ7CB6pfOygYtaVAyCMi08IAAB5xiOg"/>
      <rdf:li
-      darktable:num="9"
+      darktable:num="8"
       darktable:operation="highlights"
       darktable:enabled="0"
       darktable:modversion="2"
@@ -126,7 +116,7 @@
       darktable:blendop_version="10"
       darktable:blendop_params="gz13eJxjYGBgYARiCQYYOOHEgAYY0QVwggZ7CB6pfNoAAErAGQU="/>
      <rdf:li
-      darktable:num="10"
+      darktable:num="9"
       darktable:operation="temperature"
       darktable:enabled="0"
       darktable:modversion="3"
@@ -135,6 +125,16 @@
       darktable:multi_priority="0"
       darktable:blendop_version="10"
       darktable:blendop_params="gz14eJxjYIAACQYYOOHEgAYY0QVwggZ7CB6pfNoAAEkgGQQ="/>
+     <rdf:li
+      darktable:num="10"
+      darktable:operation="exposure"
+      darktable:enabled="0"
+      darktable:modversion="6"
+      darktable:params="00000000000080b90000003f00004842000080c001000000"
+      darktable:multi_name=""
+      darktable:multi_priority="0"
+      darktable:blendop_version="10"
+      darktable:blendop_params="gz13eJxjYGBgYAZiCQYYOOHEgAYY0QVwggZ7CB6pfNoAAE4AGQc="/>
     </rdf:Seq>
    </darktable:history>
   </rdf:Description>

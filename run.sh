@@ -21,7 +21,8 @@ CDPATH=
 
 CLI=${DARKTABLE_CLI:-darktable-cli}
 TEST_IMAGES=$PWD/images
-LOG=$(pwd)/test-$(date +"%Y%m%d-%H%M%S").log
+LOGDIR=$(pwd)/logs
+LOG=$LOGDIR/test-$(date +"%Y%m%d-%H%M%S").log
 TESTS=""
 TEST_COUNT=0
 TEST_ERROR=0
@@ -29,6 +30,8 @@ COMPARE=$(which compare)
 DO_OPENCL=yes
 DO_DELTAE=yes
 DO_FAST_FAIL=no
+
+mkdir -p $LOGDIR
 
 # echo on console and write to log file
 function e()

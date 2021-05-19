@@ -161,12 +161,19 @@ for dir in $TESTS; do
 
                     if [ $? -ne 0 ]; then
                         e "      CPU & GPU version differ by ${diffcount} pixels"
+                        if [ $DO_DELTAE == yes ]; then
+                            e "     CPU vs. GPU report :"
+                            ../deltae output.png output-cl.png | tee -a $LOG
+                            e " "
+                        fi
                     fi
                 fi
 
                 if [ $DO_DELTAE == yes ]; then
                     if [ -f expected.png ]; then
+                        e "      Expected CPU vs. current CPU report :"
                         ../deltae expected.png output.png | tee -a $LOG
+                        e " "
                     else
                         false
                     fi

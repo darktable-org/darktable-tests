@@ -4,6 +4,7 @@
 #
 #   1. Put darktable-cli in the PATH
 #   2. Set DARKTABLE_CLI to the full pathname of darktable-cli executable
+#   3. Have installed darktable to test in /opt/darktable
 #
 # To run the test suite:
 #
@@ -19,7 +20,8 @@
 
 CDPATH=
 
-# If DARKTABLE_CLI not set and not found in the PATH
+# If DARKTABLE_CLI not set and darktable-cli not found in the PATH but found
+# in standard installation /opt/darktable, use it.
 if [[ -z $DARKTABLE_CLI ]] &&
        [[ -z $(which darktable-cli) ]] &&
        [[ -f /opt/darktable/bin/darktable-cli ]];

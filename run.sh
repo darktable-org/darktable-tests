@@ -19,6 +19,14 @@
 
 CDPATH=
 
+# If DARKTABLE_CLI not set and not found in the PATH
+if [[ -z $DARKTABLE_CLI ]] &&
+       [[ -z $(which darktable-cli) ]] &&
+       [[ -f /opt/darktable/bin/darktable-cli ]];
+then
+    DARKTABLE_CLI=/opt/darktable/bin/darktable-cli
+fi
+
 CLI=${DARKTABLE_CLI:-darktable-cli}
 TEST_IMAGES=$PWD/images
 LOGDIR=$(pwd)/logs

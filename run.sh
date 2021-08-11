@@ -183,12 +183,12 @@ for dir in $TESTS; do
                     if [ -f expected.png ]; then
                         e "      Expected CPU vs. current CPU report :"
                         ../deltae expected.png output.png | tee -a $LOG
+                        res=${PIPESTATUS[0]}
                         e " "
                     else
                         false
+                        res=$?
                     fi
-
-                    res=$?
 
                     if [ $res -lt 2 ]; then
                         e "  OK"

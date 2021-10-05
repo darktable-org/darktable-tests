@@ -23,7 +23,7 @@ CDPATH=
 # If DARKTABLE_CLI not set and darktable-cli not found in the PATH but found
 # in standard installation /opt/darktable, use it.
 if [[ -z $DARKTABLE_CLI ]] &&
-       [[ -z $(which darktable-cli) ]] &&
+       [[ -z $(command -v darktable-cli) ]] &&
        [[ -f /opt/darktable/bin/darktable-cli ]];
 then
     DARKTABLE_CLI=/opt/darktable/bin/darktable-cli
@@ -36,7 +36,7 @@ LOG=$LOGDIR/test-$(date +"%Y%m%d-%H%M%S").log
 TESTS=""
 TEST_COUNT=0
 TEST_ERROR=0
-COMPARE=$(which compare)
+COMPARE=$(command -v compare)
 DO_OPENCL=yes
 DO_DELTAE=yes
 DO_FAST_FAIL=no
@@ -49,11 +49,11 @@ function e()
     echo "$*" | tee -a $LOG
 }
 
-[ -z $(which $CLI) ] && echo Make sure $CLI is in the path && exit 1
+[[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1
 
 set -- $(getopt -q -u -o : -l disable-opencl,no-deltae,fast-fail,op:,operation: -- $*)
 
-while [ $# -gt 0 ]; do
+while [[ $# -gt 0 ]]; do
     case $1 in
         --disable-opencl)
             DO_OPENCL=no
@@ -68,7 +68,7 @@ while [ $# -gt 0 ]; do
             shift
             OP=$1
             TESTS=$(grep -l "operation=\"$OP\"" */*.xmp | while read xmp; do echo $(dirname $xmp); done)
-            [ -z "$TESTS" ] && echo error: operation $OP did not macth any test && exit 1
+            [[ -z "$TESTS" ]] && echo error: operation $OP did not macth any test && exit 1
             ;;
         (--)
             ;;
@@ -83,19 +83,20 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-[ -z "$TESTS" ] && TESTS="$(ls -d [0-9]*)"
+# No test specified, run all of them
+[[ -z "$TESTS" ]] && TESTS="$(ls -d [0-9]*)"
 
 for dir in $TESTS; do
     e Test $dir
     TEST_COUNT=$((TEST_COUNT + 1))
 
-    if [ -f $dir/test.sh ]; then
+    if [[ -f $dir/test.sh ]]; then
         # The test has a specific driver
         (
             $dir/test.sh
         )
 
-        if [ $? = 0 ]; then
+        if [[ $? = 0 ]]; then
             e "  OK"
         else
             e "  FAILS: specific test"
@@ -114,10 +115,10 @@ for dir in $TESTS; do
 
             TEST=${dir:5}
 
-            [ ! -f $TEST.xmp ] &&
+            [[ ! -f $TEST.xmp ]] &&
                 e missing $dir.xmp && exit 1
 
-            [ ! -f expected.png ] && e "      missing expected.png"
+            [[ ! -f expected.png ]] && e "      missing expected.png"
 
             IMAGE=$(grep DerivedFrom $TEST.xmp | cut -d'"' -f2)
 
@@ -154,7 +155,7 @@ for dir in $TESTS; do
 
             res=$?
 
-            if [ $DO_OPENCL == yes ]; then
+            if [[ $DO_OPENCL == yes ]]; then
                 $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \
                      "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
@@ -165,13 +166,13 @@ for dir in $TESTS; do
 
             # If all ok, check Delta-E
 
-            if [ $res -eq 0 ]; then
-                if [ ! -z "$COMPARE" -a $DO_OPENCL == yes ]; then
+            if [[ $res -eq 0 ]]; then
+                if [[ ! -z "$COMPARE" ]] && [[ $DO_OPENCL == yes ]]; then
                     diffcount="$($COMPARE output.png output-cl.png -metric ae diff-cl.png 2>&1 )"
 
-                    if [ $? -ne 0 ]; then
+                    if [[ $? -ne 0 ]]; then
                         e "      CPU & GPU version differ by ${diffcount} pixels"
-                        if [ $DO_DELTAE == yes ]; then
+                        if [[ $DO_DELTAE == yes ]]; then
                             e "      CPU vs. GPU report :"
                             ../deltae output.png output-cl.png | tee -a $LOG
                             e " "
@@ -179,8 +180,8 @@ for dir in $TESTS; do
                     fi
                 fi
 
-                if [ $DO_DELTAE == yes ]; then
-                    if [ -f expected.png ]; then
+                if [[ $DO_DELTAE == yes ]]; then
+                    if [[ -f expected.png ]]; then
                         e "      Expected CPU vs. current CPU report :"
                         ../deltae expected.png output.png | tee -a $LOG
                         res=${PIPESTATUS[0]}
@@ -190,23 +191,23 @@ for dir in $TESTS; do
                         res=$?
                     fi
 
-                    if [ $res -lt 2 ]; then
+                    if [[ $res -lt 2 ]]; then
                         e "  OK"
-                        if [ $res = 1 ]; then
+                        if [[ $res = 1 ]]; then
                             diffcount="$($COMPARE expected.png output.png -metric ae diff-ok.png 2>&1 )"
                         fi
                         res=0
 
                     else
                         e "  FAILS: image visually changed"
-                        if [ ! -z $COMPARE -a -f expected.png ]; then
+                        if [[ ! -z $COMPARE ]] && [[ -f expected.png ]]; then
                             diffcount="$($COMPARE expected.png output.png -metric ae diff.png 2>&1 )"
                             e "         see diff.png for visual difference"
 			    e "         (${diffcount} pixels changed)"
                         fi
                     fi
                 else
-                    if [ -z $COMPARE ]; then
+                    if [[ -z $COMPARE ]]; then
                         e "no delta-e mode : required compare tool not found."
                         res=1
                     else
@@ -233,11 +234,11 @@ for dir in $TESTS; do
                 res=1
             fi
 
-            if [ ! -f expected.png ]; then
+            if [[ ! -f expected.png ]]; then
                 e "  copy output.png to expected.png"
                 e "  optimize size of expected.png"
 
-                if [ -z $(which zopflipng) ]; then
+                if [[ -z $(which zopflipng) ]]; then
                     echo
                     echo "  ERROR: please install zopflipng tool."
                     exit 1
@@ -252,10 +253,10 @@ for dir in $TESTS; do
             exit $res
         )
 
-        if [ $? -ne 0 ]; then
+        if [[ $? -ne 0 ]]; then
             TEST_ERROR=$((TEST_ERROR + 1))
 
-            [ $DO_FAST_FAIL == yes ] && break;
+            [[ $DO_FAST_FAIL == yes ]] && break;
         fi
     fi
 

@@ -238,7 +238,7 @@ for dir in $TESTS; do
                 e "  copy output.png to expected.png"
                 e "  optimize size of expected.png"
 
-                if [[ -z $(which zopflipng) ]]; then
+                if [[ -z $(command -v zopflipng) ]]; then
                     echo
                     echo "  ERROR: please install zopflipng tool."
                     exit 1

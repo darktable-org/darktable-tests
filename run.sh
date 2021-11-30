@@ -36,6 +36,7 @@ LOG=$LOGDIR/test-$(date +"%Y%m%d-%H%M%S").log
 TESTS=""
 TEST_COUNT=0
 TEST_ERROR=0
+TEST_FAILED=()
 COMPARE=$(command -v compare)
 DO_OPENCL=yes
 DO_DELTAE=yes
@@ -101,6 +102,7 @@ for dir in $TESTS; do
         else
             e "  FAILS: specific test"
             TEST_ERROR=$((TEST_ERROR + 1))
+            TEST_FAILED+=($dir)
         fi
 
     else
@@ -255,6 +257,7 @@ for dir in $TESTS; do
 
         if [[ $? -ne 0 ]]; then
             TEST_ERROR=$((TEST_ERROR + 1))
+            TEST_FAILED+=($dir)
 
             [[ $DO_FAST_FAIL == yes ]] && break;
         fi
@@ -265,4 +268,11 @@ done
 
 e "Total test $TEST_COUNT"
 e "Errors     $TEST_ERROR"
+
+if [[ $TEST_ERROR > 0 ]]; then
+    for D in "${TEST_FAILED[@]}"; do
+        echo "   - $D"
+    done
+fi
+
 echo "see $(basename $LOG)"

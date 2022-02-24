@@ -140,6 +140,7 @@ for dir in $TESTS; do
 
             # All common core options:
             CORE_OPTIONS="--conf host_memory_limit=8192 \
+                 --conf resourcelevel=reference \
                  --conf worker_threads=4 -t 4 \
                  --conf plugins/lighttable/export/force_lcms2=FALSE \
                  --conf plugins/lighttable/export/iccintent=0"

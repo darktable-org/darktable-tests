@@ -15,6 +15,7 @@
 MAX_DELTA_E = 2.3
 MAX_AVG_DELTA_E = MAX_DELTA_E / 3.
 
+from packaging import version
 import colour
 import numpy
 import sys
@@ -29,10 +30,16 @@ output = sys.argv[2]
 expected_rgb = colour.read_image(expected, method="Imageio")
 output_rgb = colour.read_image(output, method="Imageio")
 
-expected_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(expected_rgb,
-                                                    chromatic_adaptation_method="Bradford"))
-output_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(output_rgb,
-                                                  chromatic_adaptation_method="Bradford"))
+if version.parse(colour.__version__) > version.parse("0.3"):
+    expected_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(expected_rgb,
+                                                        chromatic_adaptation_transform="Bradford"))
+    output_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(output_rgb,
+                                                      chromatic_adaptation_transform="Bradford"))
+else:
+    expected_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(expected_rgb,
+                                                        chromatic_adaptation_method="Bradford"))
+    output_lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(output_rgb,
+                                                      chromatic_adaptation_method="Bradford"))
 
 delta_E = colour.delta_E(expected_lab, output_lab, method="CIE 2000")
 

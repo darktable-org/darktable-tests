@@ -1,0 +1,1694 @@
+Test 0000-nop
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0001-exposure
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0002-local-contrast
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 2.13545
+      Avg dE                   : 0.29550
+      Std dE                   : 0.27302
+      ----------------------------------
+      Pixels below avg + 0 std : 46.11 %
+      Pixels below avg + 1 std : 84.46 %
+      Pixels below avg + 3 std : 99.95 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0003-denoise-bilateral
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0004-masks
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.17570
+      Avg dE                   : 0.00008
+      Std dE                   : 0.00735
+      ----------------------------------
+      Pixels below avg + 0 std : 99.99 %
+      Pixels below avg + 1 std : 99.99 %
+      Pixels below avg + 3 std : 99.99 %
+      Pixels below avg + 6 std : 99.99 %
+      Pixels below avg + 9 std : 99.99 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0005-orientation-minus-90
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0006-orientation-plus-90
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0007-orientation-180
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0008-flip-h
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0009-flip-v
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0010-flip-hv
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0011-gdnd-90
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0012-gdnd-45
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0013-denoiseprofile-wavelets
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.66444
+      Avg dE                   : 0.00258
+      Std dE                   : 0.03633
+      ----------------------------------
+      Pixels below avg + 0 std : 99.39 %
+      Pixels below avg + 1 std : 99.39 %
+      Pixels below avg + 3 std : 99.39 %
+      Pixels below avg + 6 std : 99.42 %
+      Pixels below avg + 9 std : 99.63 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0014-filmic-rgb
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.99683
+      Avg dE                   : 0.00009
+      Std dE                   : 0.00738
+      ----------------------------------
+      Pixels below avg + 0 std : 99.98 %
+      Pixels below avg + 1 std : 99.98 %
+      Pixels below avg + 3 std : 99.98 %
+      Pixels below avg + 6 std : 99.98 %
+      Pixels below avg + 9 std : 99.98 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0015-shadhi-bilateral
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0016-lowpass-bilateral
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0017-monochrome
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0018-perspective-corr
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0019-color-mapping
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0020-denoise-nlmeans
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.43607
+      Avg dE                   : 0.00058
+      Std dE                   : 0.01434
+      ----------------------------------
+      Pixels below avg + 0 std : 99.82 %
+      Pixels below avg + 1 std : 99.82 %
+      Pixels below avg + 3 std : 99.82 %
+      Pixels below avg + 6 std : 99.82 %
+      Pixels below avg + 9 std : 99.82 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0021-retouch-wavelets
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0022-color-zones
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.05122
+      Avg dE                   : 0.00030
+      Std dE                   : 0.01315
+      ----------------------------------
+      Pixels below avg + 0 std : 99.94 %
+      Pixels below avg + 1 std : 99.94 %
+      Pixels below avg + 3 std : 99.94 %
+      Pixels below avg + 6 std : 99.94 %
+      Pixels below avg + 9 std : 99.94 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0023-channelmixer
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.88650
+      Avg dE                   : 0.00038
+      Std dE                   : 0.01171
+      ----------------------------------
+      Pixels below avg + 0 std : 99.88 %
+      Pixels below avg + 1 std : 99.88 %
+      Pixels below avg + 3 std : 99.88 %
+      Pixels below avg + 6 std : 99.88 %
+      Pixels below avg + 9 std : 99.88 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0024-contrast-equalizer
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0025-exposure-guided-filter
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0026-haze-removal
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0027-denoiseprofile-nlmeans
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.01299
+      Avg dE                   : 0.00003
+      Std dE                   : 0.00464
+      ----------------------------------
+      Pixels below avg + 0 std : 99.99 %
+      Pixels below avg + 1 std : 99.99 %
+      Pixels below avg + 3 std : 99.99 %
+      Pixels below avg + 6 std : 99.99 %
+      Pixels below avg + 9 std : 99.99 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0028-highpass-overlay
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.57901
+      Avg dE                   : 0.00003
+      Std dE                   : 0.00456
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0029-color-correction
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.96199
+      Avg dE                   : 0.00003
+      Std dE                   : 0.00312
+      ----------------------------------
+      Pixels below avg + 0 std : 99.99 %
+      Pixels below avg + 1 std : 99.99 %
+      Pixels below avg + 3 std : 99.99 %
+      Pixels below avg + 6 std : 99.99 %
+      Pixels below avg + 9 std : 99.99 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0030-framing
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0031-globaltonemap-drago
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0032-watermark
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.54489
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00033
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0033-blending-modes-uniform
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.82402
+      Avg dE                   : 0.00001
+      Std dE                   : 0.00246
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0034-blending-modes-parametric
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.13090
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00008
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0035-multiple-modules
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.86965
+      Avg dE                   : 0.00004
+      Std dE                   : 0.00502
+      ----------------------------------
+      Pixels below avg + 0 std : 99.99 %
+      Pixels below avg + 1 std : 99.99 %
+      Pixels below avg + 3 std : 99.99 %
+      Pixels below avg + 6 std : 99.99 %
+      Pixels below avg + 9 std : 99.99 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0036-liquify
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0037-filmic-reconstruction
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.22913
+      Avg dE                   : 0.00446
+      Std dE                   : 0.04670
+      ----------------------------------
+      Pixels below avg + 0 std : 98.90 %
+      Pixels below avg + 1 std : 98.92 %
+      Pixels below avg + 3 std : 99.00 %
+      Pixels below avg + 6 std : 99.18 %
+      Pixels below avg + 9 std : 99.50 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0038-colorcontrast
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0039-invert
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0040-fill-light
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0041-localtonemap
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.01177
+      Avg dE                   : 0.00002
+      Std dE                   : 0.00352
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0042-zonesystem
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0043-dithering-fs
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0044-dithering-random
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0045-vignetting
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.01238
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00170
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0046-demosaic-greens
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0047-demosaic-amaze
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0048-demosaic-vng
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0049-rawdenoise
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0050-bloom
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0051-soften
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.20606
+      Avg dE                   : 0.00009
+      Std dE                   : 0.00779
+      ----------------------------------
+      Pixels below avg + 0 std : 99.98 %
+      Pixels below avg + 1 std : 99.98 %
+      Pixels below avg + 3 std : 99.98 %
+      Pixels below avg + 6 std : 99.98 %
+      Pixels below avg + 9 std : 99.98 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0052-color-reconstruction
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0053-levels
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0054-rgblevels-linked
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.01388
+      Avg dE                   : 0.00001
+      Std dE                   : 0.00299
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0055-rgblevels-indep
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.60905
+      Avg dE                   : 0.00001
+      Std dE                   : 0.00193
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0056-vibrance
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0057-colorize
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0058-defringe
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.51833
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00031
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0059-grain
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0060-rgbcurve-indep
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.48482
+      Avg dE                   : 0.00001
+      Std dE                   : 0.00162
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0061-lowlight
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0062-splittoning
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.86425
+      Avg dE                   : 0.00001
+      Std dE                   : 0.00228
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0063-velvia
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.98326
+      Avg dE                   : 0.00001
+      Std dE                   : 0.00265
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0064-demosaic-xtrans-vng
+      Image mire1-xtrans.raf
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0065-demosaic-mark1
+      Image mire1-xtrans.raf
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0066-demosaic-mark3
+      Image mire1-xtrans.raf
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0067-demosaic-fdc
+      Image mire1-xtrans.raf
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0068-rawdenoise-xtrans
+      Image mire1-xtrans.raf
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0069-tonecurve-rgb-linked
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0070-tonecurve-xyz-linked
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0071-tonecurve-lab-linked
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0072-tonecurve-lab-indep
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0073-spot-removal
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.87254
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00059
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0074-retouch-clone
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.92927
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00133
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0075-retouch-heal
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.08842
+      Avg dE                   : 0.00179
+      Std dE                   : 0.03299
+      ----------------------------------
+      Pixels below avg + 0 std : 99.66 %
+      Pixels below avg + 1 std : 99.66 %
+      Pixels below avg + 3 std : 99.67 %
+      Pixels below avg + 6 std : 99.68 %
+      Pixels below avg + 9 std : 99.70 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0076-retouch-blur-fill
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0077-croprotate-keystone
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0078-basecurve-fusion
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0079-toneequal-gf
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.17758
+      Avg dE                   : 0.00903
+      Std dE                   : 0.07742
+      ----------------------------------
+      Pixels below avg + 0 std : 98.50 %
+      Pixels below avg + 1 std : 98.51 %
+      Pixels below avg + 3 std : 98.55 %
+      Pixels below avg + 6 std : 98.83 %
+      Pixels below avg + 9 std : 99.59 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0080-toneequal-eigf
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.20323
+      Avg dE                   : 0.01090
+      Std dE                   : 0.08598
+      ----------------------------------
+      Pixels below avg + 0 std : 98.24 %
+      Pixels below avg + 1 std : 98.25 %
+      Pixels below avg + 3 std : 98.31 %
+      Pixels below avg + 6 std : 98.79 %
+      Pixels below avg + 9 std : 99.54 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0081-mask-groups
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.08515
+      Avg dE                   : 0.00032
+      Std dE                   : 0.01363
+      ----------------------------------
+      Pixels below avg + 0 std : 99.94 %
+      Pixels below avg + 1 std : 99.94 %
+      Pixels below avg + 3 std : 99.94 %
+      Pixels below avg + 6 std : 99.94 %
+      Pixels below avg + 9 std : 99.94 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0082-demosaic-rcd
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.78727
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00096
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0083-colorbalancergb
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.85110
+      Avg dE                   : 0.32072
+      Std dE                   : 0.26054
+      ----------------------------------
+      Pixels below avg + 0 std : 41.56 %
+      Pixels below avg + 1 std : 89.67 %
+      Pixels below avg + 3 std : 99.51 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0084-cacorrect
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.38535
+      Avg dE                   : 0.00024
+      Std dE                   : 0.01133
+      ----------------------------------
+      Pixels below avg + 0 std : 99.95 %
+      Pixels below avg + 1 std : 99.95 %
+      Pixels below avg + 3 std : 99.95 %
+      Pixels below avg + 6 std : 99.95 %
+      Pixels below avg + 9 std : 99.95 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0085-channelmixerrgb
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.98795
+      Avg dE                   : 0.00021
+      Std dE                   : 0.00925
+      ----------------------------------
+      Pixels below avg + 0 std : 99.94 %
+      Pixels below avg + 1 std : 99.94 %
+      Pixels below avg + 3 std : 99.94 %
+      Pixels below avg + 6 std : 99.94 %
+      Pixels below avg + 9 std : 99.94 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0086-diffuse
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.98433
+      Avg dE                   : 0.00009
+      Std dE                   : 0.00695
+      ----------------------------------
+      Pixels below avg + 0 std : 99.98 %
+      Pixels below avg + 1 std : 99.98 %
+      Pixels below avg + 3 std : 99.98 %
+      Pixels below avg + 6 std : 99.98 %
+      Pixels below avg + 9 std : 99.98 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0087-blendif-and-or
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.13663
+      Avg dE                   : 0.00013
+      Std dE                   : 0.00855
+      ----------------------------------
+      Pixels below avg + 0 std : 99.97 %
+      Pixels below avg + 1 std : 99.97 %
+      Pixels below avg + 3 std : 99.97 %
+      Pixels below avg + 6 std : 99.97 %
+      Pixels below avg + 9 std : 99.97 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0088-blendif-diff-excl
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.00001
+      Avg dE                   : 0.00006
+      Std dE                   : 0.00562
+      ----------------------------------
+      Pixels below avg + 0 std : 99.99 %
+      Pixels below avg + 1 std : 99.99 %
+      Pixels below avg + 3 std : 99.99 %
+      Pixels below avg + 6 std : 99.99 %
+      Pixels below avg + 9 std : 99.99 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0089-blurs
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 1.19731
+      Avg dE                   : 0.00003
+      Std dE                   : 0.00405
+      ----------------------------------
+      Pixels below avg + 0 std : 99.99 %
+      Pixels below avg + 1 std : 99.99 %
+      Pixels below avg + 3 std : 99.99 %
+      Pixels below avg + 6 std : 99.99 %
+      Pixels below avg + 9 std : 99.99 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0090-mask-combine
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0091-mask-combine-intersection-inverted
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0092-filmicrgb-v6
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Test 0093-colorbalancergb-ucs
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+      ----------------------------------
+      Max dE                   : 0.00000
+      Avg dE                   : 0.00000
+      Std dE                   : 0.00000
+      ----------------------------------
+      Pixels below avg + 0 std : 100.00 %
+      Pixels below avg + 1 std : 100.00 %
+      Pixels below avg + 3 std : 100.00 %
+      Pixels below avg + 6 std : 100.00 %
+      Pixels below avg + 9 std : 100.00 %
+      ----------------------------------
+      Pixels above tolerance   : 0.00 %
+ 
+  OK
+
+Total test 94
+Errors     0

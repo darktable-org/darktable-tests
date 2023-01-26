@@ -1,0 +1,11 @@
+Test 0000-nop
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :
+ 
+  FAILS: image visually changed
+         see diff.png for visual difference
+         (0 pixels changed)
+
+Test 0001-exposure
+      Image mire1.cr2
+      Expected CPU vs. current CPU report :

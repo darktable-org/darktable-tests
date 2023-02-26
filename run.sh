@@ -143,6 +143,8 @@ for dir in $TESTS; do
                  --conf resourcelevel=reference \
                  --conf worker_threads=4 -t 4 \
                  --conf plugins/lighttable/export/force_lcms2=FALSE \
+                 --conf plugins/lighttable/export/pixel_interpolator=lanczos3 \
+                 --conf plugins/lighttable/export/pixel_interpolator_warp=bicubic \
                  --conf plugins/lighttable/export/iccintent=0"
 
             # Some // loops seems to not honor the omp_set_num_threads() in

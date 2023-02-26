@@ -33,6 +33,8 @@ Needed tools : zopflipng
 2. Start darktable, open one test image (or add a new one if needed)
 
 3. Do a dev using whatever module
+   (please make sure you are using lanczos3 for the pixel interpolator and
+     bicubic for warp interpolator in your preferences)
 
 4. Copy the resulting .xmp into <nnnn>-<meaningful name>
 

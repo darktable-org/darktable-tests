@@ -1,0 +1,6 @@
+not stable across computers
+
+The large set of activated module account for cumulated diff
+which makes the output impossible to have fully stable accros
+computers. Note that the changed pixels should be around
+17000.

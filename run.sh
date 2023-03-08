@@ -88,7 +88,12 @@ done
 [[ -z "$TESTS" ]] && TESTS="$(ls -d [0-9]*)"
 
 for dir in $TESTS; do
-    e Test $dir
+    label="$dir"
+    if [[ -f $dir/README ]]; then
+        label+=" ($(head -1 $dir/README))"
+    fi
+    e Test $label
+
     TEST_COUNT=$((TEST_COUNT + 1))
 
     if [[ -f $dir/test.sh ]]; then

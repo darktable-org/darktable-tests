@@ -88,10 +88,15 @@ done
 [[ -z "$TESTS" ]] && TESTS="$(ls -d [0-9]*)"
 
 for dir in $TESTS; do
+    # Read optional CONFIG file, add corresponding options
     config=""
     if [[ -f $dir/CONFIG ]]; then
-	config="--conf $(head -1 $dir/CONFIG)"
+        while read confstr; do
+	    config+=" --conf $confstr"
+        done < $dir/CONFIG
     fi
+
+    # Read option README, add first line as hint message
     label="$dir"
     if [[ -f $dir/README ]]; then
         label+=" ($(head -1 $dir/README))"

@@ -88,6 +88,10 @@ done
 [[ -z "$TESTS" ]] && TESTS="$(ls -d [0-9]*)"
 
 for dir in $TESTS; do
+    config=""
+    if [[ -f $dir/CONFIG ]]; then
+	config="--conf $(head -1 $dir/CONFIG)"
+    fi
     label="$dir"
     if [[ -f $dir/README ]]; then
         label+=" ($(head -1 $dir/README))"
@@ -159,7 +163,7 @@ for dir in $TESTS; do
             $CLI --width 2048 --height 2048 \
                  --hq true --apply-custom-presets false \
                  "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output.png \
-                 --core --disable-opencl $CORE_OPTIONS 1> /dev/null  2> /dev/null
+                 --core --disable-opencl $CORE_OPTIONS $config 1> /dev/null  2> /dev/null
 
             res=$?
 
@@ -167,7 +171,7 @@ for dir in $TESTS; do
                 $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \
                      "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
-                     --core $CORE_OPTIONS 1> /dev/null 2> /dev/null
+                     --core $CORE_OPTIONS $config 1> /dev/null 2> /dev/null
 
                 res=$((res + $?))
             fi

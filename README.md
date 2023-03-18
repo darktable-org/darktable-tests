@@ -38,7 +38,22 @@ Needed tools : zopflipng
 
    And rename it ```<meaningful name>.xmp```
 
-5. Do a first run of the test to get the expected output
+5. Add a README (optional)
+
+   First line is a short label that will be added next to the
+   test name. This can be used to give specific description for
+   a test (like an unstable test across computers).
+
+   The rest of the README can contain a long description if
+   needed.
+
+6. Add a CONFIG (optional)
+
+   The config file must contain one darktable-cli option per
+   line. Each option has the same format as the ones found in
+   darktablerc.
+
+7. Do a first run of the test to get the expected output
 
 ```bash
    ./run <dir>
@@ -47,7 +62,7 @@ Needed tools : zopflipng
    The output.png will be copied to expected.png, double check that
    expected.png is correct and really the expected output.
 
-6. Test that all is ok by running:
+8. Test that all is ok by running:
 
 
 ```bash
@@ -78,7 +93,7 @@ Test 0001-exposure
   OK
 ```
 
-7. If all goes well commit the .xmp and expected.png files
+9. If all goes well commit the .xmp and expected.png files
 
 
 

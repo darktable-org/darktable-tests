@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Requires:
 #   python3-scipy >= 1.1.0
@@ -10,6 +10,7 @@
 #   python3-colour-science >= 0.3.14
 #     or install the latest from PyPi if not provided as system package:
 #       pip3 install colour-science
+#   packaging
 
 # Maximum delta allowed, above this value the difference can be detected
 MAX_DELTA_E = 2.3

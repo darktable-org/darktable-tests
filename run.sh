@@ -184,7 +184,7 @@ for dir in $TESTS; do
             # If all ok, check Delta-E
 
             if [[ $res -eq 0 ]]; then
-                if [[ ! -z "$COMPARE" ]] && [[ $DO_OPENCL == yes ]]; then
+                if [[ -n "$COMPARE" ]] && [[ $DO_OPENCL == yes ]]; then
                     diffcount="$($COMPARE output.png output-cl.png -metric ae diff-cl.png 2>&1 )"
 
                     if [[ $? -ne 0 ]]; then

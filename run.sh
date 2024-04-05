@@ -264,7 +264,7 @@ for dir in $TESTS; do
                 zopflipng output.png expected.png 1> /dev/null 2>&1
 
                 e "  check that expected.png is correct:"
-                e "  \$ eog $(basename $PWD)/expected.png"
+                e "  \$ xdg-open $(basename $PWD)/expected.png"
             fi
 
             exit $res

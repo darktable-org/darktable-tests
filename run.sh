@@ -172,6 +172,17 @@ for dir in $TESTS; do
 
             res=$?
 
+            if [[ $res != 0 ]]; then
+                echo "========== COMMAND fails"
+                echo "To reproduce and debug:"
+                echo cd $(pwd)\; \
+                    gdb --args $CLI --width 2048 --height 2048 \
+                         --hq true --apply-custom-presets false \
+                         "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output.png \
+                         --core --disable-opencl $CORE_OPTIONS $config
+            fi
+
+
             if [[ $DO_OPENCL == yes ]]; then
                 $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \

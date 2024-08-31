@@ -30,6 +30,8 @@ then
 fi
 
 CLI=${DARKTABLE_CLI:-darktable-cli}
+CLI_REDIR="1> /dev/null  2> /dev/null"
+CLI_CL_REDIR="1> /dev/null  2> /dev/null"
 TEST_IMAGES=$PWD/images
 LOGDIR=$(pwd)/logs
 LOG=$LOGDIR/test-$(date +"%Y%m%d-%H%M%S").log
@@ -41,6 +43,8 @@ COMPARE=$(command -v compare)
 DO_OPENCL=yes
 DO_DELTAE=yes
 DO_FAST_FAIL=no
+DO_GDB=no
+DO_GDB_CL=no
 
 mkdir -p $LOGDIR
 
@@ -52,12 +56,18 @@ function e()
 
 [[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1
 
-set -- $(getopt -q -u -o : -l disable-opencl,no-deltae,fast-fail,op:,operation: -- $*)
+set -- $(getopt -q -u -o : -l gdb,gdb-cl,disable-opencl,no-deltae,fast-fail,op:,operation: -- $*)
 
 while [[ $# -gt 0 ]]; do
     case $1 in
         --disable-opencl)
             DO_OPENCL=no
+            ;;
+        --gdb-cl)
+            DO_GDB_CL=yes
+            ;;
+        --gdb)
+            DO_GDB=yes
             ;;
         --no-deltae)
             DO_DELTAE=no
@@ -86,6 +96,18 @@ done
 
 # No test specified, run all of them
 [[ -z "$TESTS" ]] && TESTS="$(ls -d [0-9]*)"
+
+[[ $DO_GDB == yes ]] &&
+    {
+        GDB_CLI="gdb --args"
+        CLI_REDIR="2> /dev/null"
+    }
+
+[[ $DO_GDB_CL == yes ]] &&
+    {
+        GDB_CLI_CL="gdb --args"
+        CLI_CL_REDIR="2> /dev/null"
+    }
 
 for dir in $TESTS; do
     # Read optional CONFIG file, add corresponding options
@@ -165,10 +187,10 @@ for dir in $TESTS; do
 
             export OMP_THREAD_LIMIT=4
 
-            $CLI --width 2048 --height 2048 \
+            $GDB_CLI $CLI --width 2048 --height 2048 \
                  --hq true --apply-custom-presets false \
                  "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output.png \
-                 --core --disable-opencl $CORE_OPTIONS $config 1> /dev/null  2> /dev/null
+                 --core --disable-opencl $CORE_OPTIONS $config $CLI_REDIR
 
             res=$?
 
@@ -184,12 +206,22 @@ for dir in $TESTS; do
 
 
             if [[ $DO_OPENCL == yes ]]; then
-                $CLI --width 2048 --height 2048 \
+                $GDB_CLI_CL $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \
                      "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
-                     --core $CORE_OPTIONS $config 1> /dev/null 2> /dev/null
+                     --core $CORE_OPTIONS $config $CLI_CL_REDIR
 
                 res=$((res + $?))
+
+                if [[ $res != 0 ]]; then
+                    echo "========== COMMAND fails"
+                    echo "To reproduce and debug:"
+                    echo cd $(pwd)\; \
+                         gdb --args $CLI --width 2048 --height 2048 \
+                         --hq true --apply-custom-presets false \
+                         "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
+                         --core $CORE_OPTIONS $config
+                fi
             fi
 
             # If all ok, check Delta-E

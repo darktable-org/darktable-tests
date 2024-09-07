@@ -30,8 +30,6 @@ then
 fi
 
 CLI=${DARKTABLE_CLI:-darktable-cli}
-CLI_REDIR="1> /dev/null  2> /dev/null"
-CLI_CL_REDIR="1> /dev/null  2> /dev/null"
 TEST_IMAGES=$PWD/images
 LOGDIR=$(pwd)/logs
 LOG=$LOGDIR/test-$(date +"%Y%m%d-%H%M%S").log
@@ -52,6 +50,17 @@ mkdir -p $LOGDIR
 function e()
 {
     echo "$*" | tee -a $LOG
+}
+
+function call()
+{
+    local FIRST=$1
+
+    if [[ $FIRST == gdb ]]; then
+        $* 2> /dev/null
+    else
+        $* 1> /dev/null  2> /dev/null
+    fi
 }
 
 [[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1
@@ -98,16 +107,10 @@ done
 [[ -z "$TESTS" ]] && TESTS="$(ls -d [0-9]*)"
 
 [[ $DO_GDB == yes ]] &&
-    {
-        GDB_CLI="gdb --args"
-        CLI_REDIR="2> /dev/null"
-    }
+    GDB_CLI="gdb --args"
 
 [[ $DO_GDB_CL == yes ]] &&
-    {
-        GDB_CLI_CL="gdb --args"
-        CLI_CL_REDIR="2> /dev/null"
-    }
+    GDB_CLI_CL="gdb --args"
 
 for dir in $TESTS; do
     # Read optional CONFIG file, add corresponding options
@@ -187,10 +190,10 @@ for dir in $TESTS; do
 
             export OMP_THREAD_LIMIT=4
 
-            $GDB_CLI $CLI --width 2048 --height 2048 \
+            call $GDB_CLI $CLI --width 2048 --height 2048 \
                  --hq true --apply-custom-presets false \
                  "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output.png \
-                 --core --disable-opencl $CORE_OPTIONS $config $CLI_REDIR
+                 --core --disable-opencl $CORE_OPTIONS $config
 
             res=$?
 
@@ -206,11 +209,10 @@ for dir in $TESTS; do
 
 
             if [[ $DO_OPENCL == yes ]]; then
-                $GDB_CLI_CL $CLI --width 2048 --height 2048 \
+                call $GDB_CLI_CL $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \
                      "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
-                     --core $CORE_OPTIONS $config $CLI_CL_REDIR
-
+                     --core $CORE_OPTIONS $config \
                 res=$((res + $?))
 
                 if [[ $res != 0 ]]; then

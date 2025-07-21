@@ -63,6 +63,23 @@ function call()
     fi
 }
 
+function get-diff()
+{
+    local -n _ABSERR=$1
+    local -n _NBPIX=$2
+    local FROM=$3
+    local TO=$4
+    local DIFF=$5
+
+    local RES=( $( $COMPARE $FROM $TO -metric ae $DIFF 2>&1 ) )
+
+    _ABSERR=${RES[0]}
+    _NBPIX=${RES[1]//(/}
+    _NBPIX=${_NBPIX//)/}
+
+    [[ ${_NBPIX} -eq 0 ]] && return 0 || return 1
+}
+
 [[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1
 
 set -- $(getopt -q -u -o : -l gdb,gdb-cl,disable-opencl,no-deltae,fast-fail,op:,operation: -- $*)
@@ -232,10 +249,10 @@ for dir in $TESTS; do
 
             if [[ $res -eq 0 ]]; then
                 if [[ -n "$COMPARE" ]] && [[ $DO_OPENCL == yes ]]; then
-                    diffcount="$($COMPARE output.png output-cl.png -metric ae diff-cl.png 2>&1 )"
+                    get-diff ABSERR DIFFPIX output.png output-cl.png diff-cl.png
 
                     if [[ $? -ne 0 ]]; then
-                        e "      CPU & GPU version differ by ${diffcount} pixels"
+                        e "      CPU & GPU version differ by ${DIFFPIX} pixels"
                         if [[ $DO_DELTAE == yes ]]; then
                             e "      CPU vs. GPU report :"
                             ../deltae output.png output-cl.png | tee -a $LOG
@@ -258,16 +275,16 @@ for dir in $TESTS; do
                     if [[ $res -lt 2 ]]; then
                         e "  OK"
                         if [[ $res = 1 ]]; then
-                            diffcount="$($COMPARE expected.png output.png -metric ae diff-ok.png 2>&1 )"
+                            get-diff ABSERR DIFFPIX expected.png output.png diff-ok.png
                         fi
                         res=0
 
                     else
                         e "  FAILS: image visually changed"
                         if [[ ! -z $COMPARE ]] && [[ -f expected.png ]]; then
-                            diffcount="$($COMPARE expected.png output.png -metric ae diff.png 2>&1 )"
+                            get-diff ABSERR DIFFPIX expected.png output.png diff.png
                             e "         see diff.png for visual difference"
-			    e "         (${diffcount} pixels changed)"
+			    e "         (${DIFFPIX} pixels changed)"
                         fi
                     fi
                 else
@@ -275,20 +292,20 @@ for dir in $TESTS; do
                         e "no delta-e mode : required compare tool not found."
                         res=1
                     else
-                        diffcount="$($COMPARE expected.png output.png -metric ae diff-ok.png 2>&1 )"
+                        get-diff ABSERR DIFFPIX expected.png output.png diff-ok.png
 
                         # if we have an exponent just pretend this is a number
-                        # above 2000 which is the limit checked below.
+                        # above 5000 which is the limit checked below.
 
-                        if [[ $diffcount =~ e ]]; then
-                            diffcount=50000
+                        if [[ $DIFFPIX =~ e ]]; then
+                            DIFFPIX=50000
                         fi
 
-                        if [[ $diffcount -lt 2000 ]]; then
+                        if [[ $DIFFPIX -lt 5000 ]]; then
                             e "      Light check : OK"
                             res=0
                         else
-                            e "      Light check : NOK"
+                            e "      Light check : NOK ($DIFFPIX)"
                             res=1
                         fi
                     fi

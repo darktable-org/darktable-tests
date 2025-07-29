@@ -77,7 +77,8 @@ function get-diff()
     _NBPIX=${RES[1]//(/}
     _NBPIX=${_NBPIX//)/}
 
-    [[ ${_NBPIX} -eq 0 ]] && return 0 || return 1
+    [[ "${_NBPIX}" =~ "e" ]] ||
+        [[ "${_NBPIX}" -eq 0 ]] && return 0 || return 1
 }
 
 [[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1

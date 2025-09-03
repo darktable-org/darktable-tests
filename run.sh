@@ -73,8 +73,8 @@ function get-diff()
 
     local RES=( $( $COMPARE $FROM $TO -metric ae $DIFF 2>&1 ) )
 
-    _ABSERR=${RES[0]}
-    _NBPIX=${RES[1]//(/}
+    _ABSERR=${RES[1]}
+    _NBPIX=${RES[0]//(/}
     _NBPIX=${_NBPIX//)/}
 
     [[ "${_NBPIX}" =~ "e" ]] ||

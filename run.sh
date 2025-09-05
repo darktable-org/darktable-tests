@@ -20,6 +20,14 @@
 
 CDPATH=
 
+[ -f .venv/bin/activate ] || {
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install numpy colour colour-science packaging matplotlib
+  deactivate
+}
+source .venv/bin/activate
+
 # If DARKTABLE_CLI not set and darktable-cli not found in the PATH but found
 # in standard installation /opt/darktable, use it.
 if [[ -z $DARKTABLE_CLI ]] &&

@@ -216,6 +216,7 @@ for dir in $TESTS; do
                  --core --disable-opencl $CORE_OPTIONS $config
 
             res=$?
+            largepixdiff=0
 
             if [[ $res != 0 ]]; then
                 echo "========== COMMAND fails"
@@ -254,6 +255,16 @@ for dir in $TESTS; do
 
                     if [[ $? -ne 0 ]]; then
                         e "      CPU & GPU version differ by ${DIFFPIX} pixels"
+
+                        #  if CPU/GPU max pixel exists, check it
+                        if [[ -f cpugpu.maxpix ]]; then
+                            read REF < cpugpu.maxpix
+                            if (( DIFFPIX > REF )); then
+                                e "      CPU & GPU large difference > $REF"
+                                largepixdiff=1
+                            fi
+                        fi
+
                         if [[ $DO_DELTAE == yes ]]; then
                             e "      CPU vs. GPU report :"
                             ../deltae output.png output-cl.png | tee -a $LOG
@@ -332,7 +343,7 @@ for dir in $TESTS; do
                 e "  \$ xdg-open $(basename $PWD)/expected.png"
             fi
 
-            exit $res
+            exit $(( $res || $largepixdiff ))
         )
 
         if [[ $? -ne 0 ]]; then

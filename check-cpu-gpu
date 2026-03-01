@@ -1,0 +1,43 @@
+#!/bin/bash
+
+[[ -z $1 ]] &&
+    {
+        echo "usage: $0 <log> [<threshold>]"
+        echo "  <log>        : a log with CPU & GPU report"
+        echo "  <threashold> : max CPU/GPU diff pixels to report (default 25000)"
+        exit 1
+    }
+
+LOG=$1
+THRES=${2:-25000}
+
+function round-up()
+{
+    local N=$1
+
+    L=${#N}
+    L=$(( 10 ** (L - 2) ))
+    echo $(( (( N + (L-1) ) / L) * L ))
+}
+
+cat $LOG | egrep "(^Test|CPU & GPU version)" |
+    sed 's/[^0-9]* \([0-9]*\) pixels/\1/' |
+    while read line; do
+        if [[ $line =~ Test ]]; then
+            T=${line#Test }
+            echo
+            echo -n ${T%% *}
+        else
+            echo -n " $line"
+        fi
+    done |
+    while read test count; do
+        [[ -n $count ]] &&
+            {
+                NC=$(round-up $count)
+                if (( $NC > THRES )); then
+                    echo $test $count $NC
+                fi
+                echo $NC > $test/cpugpu.maxpix
+            }
+    done

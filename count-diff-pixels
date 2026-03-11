@@ -1,0 +1,40 @@
+#!/bin/python
+
+import numpy as np
+from PIL import Image
+import argparse
+
+def count_different_pixels_numpy(image_path1, image_path2, threshold=0):
+    # Open the images
+    img1 = Image.open(image_path1)
+    img2 = Image.open(image_path2)
+
+    # Check if images have the same dimensions
+    if img1.size != img2.size:
+        raise ValueError("Images must have the same dimensions")
+
+    # Convert images to NumPy arrays
+    arr1 = np.array(img1)
+    arr2 = np.array(img2)
+
+    # Calculate absolute difference for each channel
+    diff = np.abs(arr1 - arr2)
+
+    # Count pixels where any channel difference exceeds the threshold
+    diff_count = np.sum(np.any(diff > threshold, axis=-1))
+
+    return diff_count
+
+if __name__ == "__main__":
+    # Set up argument parser
+    parser = argparse.ArgumentParser(description="Count the number of different pixels between two images.")
+    parser.add_argument("image1", help="Path to the first image")
+    parser.add_argument("image2", help="Path to the second image")
+    parser.add_argument("--threshold", type=int, default=0, help="Threshold for pixel difference (default: 0)")
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    # Count differences
+    differences = count_different_pixels_numpy(args.image1, args.image2, args.threshold)
+    print(differences)

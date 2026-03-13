@@ -1,0 +1,96 @@
+#!/bin/bash
+
+[[ -z $1 ]] &&
+    {
+        echo "usage: $0 <log>"
+        exit 1
+    }
+
+function display()
+{
+    local FILE=$1
+
+    loupe $FILE > /dev/null 2>&1 &
+}
+
+function clear-display()
+{
+    killall loupe
+}
+
+function analyze()
+{
+    local T=$1
+    echo "================================== Testing $T"
+
+    display $T/diff.png &
+
+    while read -p "cmd: e/o/d/oc/dc/k/t/?: " cmd; do
+        case "$cmd" in
+            "?")
+                echo ""
+                echo "e  - expected"
+                echo "o  - output"
+                echo "d  - diff"
+                echo "oc - OpenCL output"
+                echo "od - OpenCL diff"
+                echo ""
+                echo "k  - keep expected, move next"
+                echo "t  - trash expected, move next"
+                echo ""
+                ;;
+            e)
+                display $T/expected.png &
+                continue
+                ;;
+            o)
+                display $T/output.png &
+                continue
+                ;;
+            d)
+                display $T/diff.png &
+                continue
+                ;;
+            oc)
+                display $T/output-cl.png &
+                continue
+                ;;
+            dc)
+                display $T/diff-cl.png &
+                continue
+                ;;
+            k)
+                clear-display
+                break
+                ;;
+            t)
+                clear-display
+                rm $T/expected.png
+                break
+                ;;
+        esac
+    done
+}
+
+LOG=$1
+
+# Record in TESTS all failed tests
+
+TESTS=()
+
+T=""
+
+while read line; do
+    if [[ $line =~ Test ]]; then
+        T=${line#Test}
+    elif [[ -n $T ]] && [[ $line =~ FAILS: ]]; then
+        TESTS+=($T)
+        T=""
+    fi
+done < $LOG
+
+# Analyze tests
+
+for T in ${TESTS[*]}; do
+    analyze $T
+done

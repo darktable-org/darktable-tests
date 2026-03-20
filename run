@@ -262,7 +262,7 @@ for dir in $TESTS; do
                                 e "      CPU & GPU large difference > $REF"
                                 largepixdiff=1
                             elif (( DIFFPIX < (( REF / 10 ) * 8)  )); then
-                                e "      CPU & GPU smaller difference old $DIFFPIX now $REF"
+                                e "      CPU & GPU smaller difference old $REF now $DIFFPIX"
                             fi
                         fi
 

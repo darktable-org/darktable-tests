@@ -6,8 +6,8 @@ import argparse
 
 def count_different_pixels_numpy(image_path1, image_path2, threshold=0):
     # Open the images
-    img1 = Image.open(image_path1)
-    img2 = Image.open(image_path2)
+    img1 = Image.open(image_path1).convert("RGB")
+    img2 = Image.open(image_path2).convert("RGB")
 
     # Check if images have the same dimensions
     if img1.size != img2.size:

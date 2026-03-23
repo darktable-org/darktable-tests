@@ -70,11 +70,14 @@ function get-diff()
     local TO=$3
     local DIFF=$4
 
+    _NBPIX=0
+
     # compute diff image
     $COMPARE -metric AE $FROM $TO $DIFF 1>/dev/null 2>&1
 
     # compute pixels diff
-    _NBPIX=$(../count-diff-pixels $FROM $TO)
+    [[ -f $FROM ]] &&
+        _NBPIX=$(../count-diff-pixels $FROM $TO)
 
     [[ "${_NBPIX}" == 0 ]] && return 0 || return 1
 }

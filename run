@@ -202,6 +202,7 @@ for dir in $TESTS; do
                  --conf resourcelevel=reference \
                  --conf worker_threads=4 -t 4 \
                  --conf clplatform_other=TRUE \
+                 --conf opencl_fast=FALSE \
                  --conf plugins/lighttable/export/force_lcms2=FALSE \
                  --conf plugins/lighttable/export/pixel_interpolator=lanczos3 \
                  --conf plugins/lighttable/export/pixel_interpolator_warp=bicubic \

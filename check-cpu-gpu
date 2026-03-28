@@ -16,11 +16,10 @@ function round-up()
     local N=$1
 
     L=${#N}
-    if [[ $L < 2 ]]; then
-        L=2
-    else
-        L=$(( 10 ** (L - 2) ))
+    if [[ $L -le 2 ]]; then
+        L=3
     fi
+    L=$(( 10 ** (L - 2) ))
     echo $(( (( N + (L-1) ) / L) * L ))
 }
 

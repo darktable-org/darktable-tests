@@ -32,6 +32,7 @@ cat $LOG | egrep "(^Test|CPU & GPU version)" |
             echo -n ${T%% *}
         else
             echo -n " $line"
+            echo
         fi
     done |
     while read test count; do

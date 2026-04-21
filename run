@@ -33,6 +33,8 @@ CLI=${DARKTABLE_CLI:-darktable-cli}
 TEST_IMAGES=$PWD/images
 LOGDIR=$(pwd)/logs
 LOG=$LOGDIR/test-$(date +"%Y%m%d-%H%M%S").log
+PERF_LOG=$LOGDIR/perfs.log
+PERF_ANALYZE=$LOGDIR/perfs-analyze.txt
 TESTS=""
 TEST_COUNT=0
 TEST_ERROR=0
@@ -54,12 +56,18 @@ function e()
 
 function call()
 {
+    local TEST=$1
+    local CL=$2
+
+    shift 2
     local FIRST=$1
 
     if [[ $FIRST == gdb ]]; then
         $* 2> /dev/null
     else
-        $* 1> /dev/null  2> /dev/null
+        TIME=$( { /usr/bin/time -f "%e" $* 1> /dev/null; } 2>&1 )
+        echo "$(date +'%Y-%m-%d %H:%M:%S'),\"${TEST}-${CL}\",$TIME" >> "$PERF_LOG"
+        e "      Timing $CL ${TIME}s"
     fi
 }
 
@@ -214,7 +222,7 @@ for dir in $TESTS; do
 
             export OMP_THREAD_LIMIT=4
 
-            call $GDB_CLI $CLI --width 2048 --height 2048 \
+            call $dir cpu $GDB_CLI $CLI --width 2048 --height 2048 \
                  --hq true --apply-custom-presets false \
                  "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output.png \
                  --core --disable-opencl $CORE_OPTIONS $config
@@ -234,7 +242,7 @@ for dir in $TESTS; do
 
 
             if [[ $DO_OPENCL == yes ]]; then
-                call $GDB_CLI_CL $CLI --width 2048 --height 2048 \
+                call $dir gpu $GDB_CLI_CL $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \
                      "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
                      --core $CORE_OPTIONS $config \
@@ -370,6 +378,14 @@ if [[ $TEST_ERROR > 0 ]]; then
     for D in "${TEST_FAILED[@]}"; do
         echo "   - $D"
     done
+fi
+
+./check-performance
+
+if [[ $? == 1 ]]; then
+    echo
+    e "Performance regressions:"
+    cat $PERF_ANALYZE
 fi
 
 echo "see $(basename $LOG)"

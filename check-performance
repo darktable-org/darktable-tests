@@ -1,0 +1,48 @@
+#!/bin/bash
+
+LOGDIR=$(pwd)/logs
+PERF_LOG="$LOGDIR/perfs.log"
+PERF_ANALYZE="$LOGDIR/perfs-analyze.txt"
+
+# Clear or create output file
+> "$PERF_ANALYZE"
+
+# Extract unique tests
+COMMANDS=$(awk -F, 'NR>1 {print $2}' "$PERF_LOG" | sort | uniq)
+
+# Analyze each command
+for cmd in $COMMANDS; do
+    echo "Analyzing: $cmd" >> "$PERF_ANALYZE"
+    awk -F, -v cmd="$cmd" -v OFS=, '
+    BEGIN {
+        N=0
+    }
+    $2 == cmd {
+        time[$1] = $3;
+        dates[N] = $1;
+        times[N] = $3;
+        N++
+    }
+    END {
+        if (N > 7) {
+            for (i = 8; i <= N; i++) {
+                sum = 0;
+                for (j = i-7; j <= i; j++) sum += times[j];
+                avg = sum / 7;
+                if (times[i] > avg * 1.2) {
+                    print dates[i], "Regression detected: " times[i] " > " avg * 1.2 " (20% above 7-day avg)" >> "'"$PERF_ANALYZE"'"
+                }
+            }
+        }
+    }' "$PERF_LOG"
+done
+
+# Finaly remove entries older than 6 months
+
+SIX_MONTHS_AGO=$(date -d "6 months ago" +"%Y-%m-%d")
+awk -v cutoff="$SIX_MONTHS_AGO" '$1 >= cutoff' $PERF_LOG > tmpfile &&
+    mv tmpfile $PERF_LOG
+
+grep Regression $PERF_ANALYZE 2>&1 > /dev/null
+
+[[ $? == 1 ]]

@@ -62,10 +62,12 @@ function call()
     shift 2
     local FIRST=$1
 
+    local TIMEFORMAT="%2R"
+
     if [[ $FIRST == gdb ]]; then
         $* 2> /dev/null
     else
-        TIME=$( { /usr/bin/time -f "%e" $* 1> /dev/null; } 2>&1 )
+        TIME=$( { time $* 1> /dev/null; } 2>&1 )
         echo "$(date +'%Y-%m-%d %H:%M:%S'),\"${TEST}-${CL}\",$TIME" >> "$PERF_LOG"
         e "      Timing $CL ${TIME}s"
     fi

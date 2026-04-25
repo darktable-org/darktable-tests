@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Check performance data from perfs.log. The script needs at least 7
+# report for the same test. An issue is reported if a 10% loss of
+# performance is found during the period.
+
 LOGDIR=$(pwd)/logs
 PERF_LOG="$LOGDIR/perfs.log"
 PERF_ANALYZE="$LOGDIR/perfs-analyze.txt"
@@ -29,8 +33,8 @@ for cmd in $COMMANDS; do
                 sum = 0;
                 for (j = i-7; j <= i; j++) sum += times[j];
                 avg = sum / 7;
-                if (times[i] > avg * 1.2) {
-                    print dates[i], "Regression detected: " times[i] " > " avg * 1.2 " (20% above 7-day avg)" >> "'"$PERF_ANALYZE"'"
+                if (times[i] > avg * 1.1) {
+                    print dates[i], "Regression detected: " times[i] " > " avg * 1.1 " (10% above 7-day avg)" >> "'"$PERF_ANALYZE"'"
                 }
             }
         }

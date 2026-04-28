@@ -67,9 +67,9 @@ function call()
     local TIMEFORMAT="%2R"
 
     if [[ $FIRST == gdb ]]; then
-        $* 2> /dev/null
+        "$@" 2> /dev/null
     else
-        TIME=$( { time $* 1> /dev/null; } 2>&1 )
+        TIME=$( { time "$@" 1> /dev/null; } 2>&1 )
         res=$?
 
         echo "$(date +'%Y-%m-%d %H:%M:%S'),\"${TEST}-${CL}\",$TIME" >> "$PERF_LOG"
@@ -100,7 +100,7 @@ function get-diff()
 
 [[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1
 
-set -- $(getopt -q -u -o : -l gdb,gdb-cl,disable-opencl,disable-timing,no-deltae,fast-fail,op:,operation: -- $*)
+set -- $(getopt -q -u -o : -l gdb,gdb-cl,disable-opencl,disable-timing,no-deltae,fast-fail,op:,operation: -- "$@")
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -125,17 +125,13 @@ while [[ $# -gt 0 ]]; do
         --op|--operation)
             shift
             OP=$1
-            TESTS=$(grep -l "operation=\"$OP\"" */*.xmp | while read xmp; do echo $(dirname $xmp); done)
-            [[ -z "$TESTS" ]] && echo error: operation $OP did not macth any test && exit 1
+            TESTS=$(grep -l "operation=\"$OP\"" */*.xmp | while read -r xmp; do echo $(dirname $xmp); done)
+            [[ -z "$TESTS" ]] && echo error: operation $OP did not match any test && exit 1
             ;;
         (--)
             ;;
         (*)
             TESTS="$TESTS $(basename $1)"
-            ;;
-        (-*)
-            echo "$0: error - unrecognized option $1"
-            exit 1
             ;;
     esac
     shift
@@ -154,7 +150,7 @@ for dir in $TESTS; do
     # Read optional CONFIG file, add corresponding options
     config=""
     if [[ -f $dir/CONFIG ]]; then
-        while read confstr; do
+        while read -r confstr; do
 	    config+=" --conf $confstr"
         done < $dir/CONFIG
     fi
@@ -256,7 +252,7 @@ for dir in $TESTS; do
                 call $dir gpu $GDB_CLI_CL $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \
                      "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
-                     --core $CORE_OPTIONS $config \
+                     --core $CORE_OPTIONS $config
                 res=$((res + $?))
 
                 if [[ $res != 0 ]]; then
@@ -281,7 +277,7 @@ for dir in $TESTS; do
 
                         #  if CPU/GPU max pixel exists, check it
                         if [[ -f cpugpu.maxpix ]]; then
-                            read REF < cpugpu.maxpix
+                            read -r REF < cpugpu.maxpix
                             if (( DIFFPIX > REF )); then
                                 e "      CPU & GPU large difference > $REF"
                                 largepixdiff=1
@@ -385,7 +381,7 @@ done
 e "Total test $TEST_COUNT"
 e "Errors     $TEST_ERROR"
 
-if [[ $TEST_ERROR > 0 ]]; then
+if [[ $TEST_ERROR -gt 0 ]]; then
     for D in "${TEST_FAILED[@]}"; do
         echo "   - $D"
     done

@@ -14,6 +14,7 @@
 # Options:
 #
 #   --disable-opencl           - do not run the OpenCL path
+#   --disable-timing           - do not output timing
 #   --no-deltae                - do a light check not requiring Delta-E module
 #   --fast-fail                - abort testing on the first NOK test
 #   --op=<n> | --operation=<n> - run test with matching operation n
@@ -41,6 +42,7 @@ TEST_ERROR=0
 TEST_FAILED=()
 COMPARE=$(command -v compare)
 DO_OPENCL=yes
+DO_TIMING=yes
 DO_DELTAE=yes
 DO_FAST_FAIL=no
 DO_GDB=no
@@ -68,8 +70,12 @@ function call()
         $* 2> /dev/null
     else
         TIME=$( { time $* 1> /dev/null; } 2>&1 )
+        res=$?
+
         echo "$(date +'%Y-%m-%d %H:%M:%S'),\"${TEST}-${CL}\",$TIME" >> "$PERF_LOG"
-        e "      Timing $CL ${TIME}s"
+        [[ $DO_TIMING == yes ]] &&
+            e "      Timing $CL ${TIME}s"
+        return $res
     fi
 }
 
@@ -94,12 +100,15 @@ function get-diff()
 
 [[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1
 
-set -- $(getopt -q -u -o : -l gdb,gdb-cl,disable-opencl,no-deltae,fast-fail,op:,operation: -- $*)
+set -- $(getopt -q -u -o : -l gdb,gdb-cl,disable-opencl,disable-timing,no-deltae,fast-fail,op:,operation: -- $*)
 
 while [[ $# -gt 0 ]]; do
     case $1 in
         --disable-opencl)
             DO_OPENCL=no
+            ;;
+        --disable-timing)
+            DO_TIMING=no
             ;;
         --gdb-cl)
             DO_GDB_CL=yes

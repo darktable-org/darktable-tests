@@ -86,6 +86,7 @@ Analyzing: "0083-colorbalancergb-cpu"
 Analyzing: "0084-cacorrect-cpu"
 Analyzing: "0085-channelmixerrgb-cpu"
 Analyzing: "0086-diffuse-cpu"
+2026-05-22 05:52:43,Regression detected: 8.19 > 7.843 (10% above 7-day avg)
 Analyzing: "0087-blendif-and-or-cpu"
 Analyzing: "0088-blendif-diff-excl-cpu"
 Analyzing: "0089-blurs-cpu"

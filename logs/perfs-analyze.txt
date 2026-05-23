@@ -1,5 +1,6 @@
 Analyzing: "0000-nop-cpu"
 Analyzing: "0001-exposure-cpu"
+2026-05-23 05:34:38,Regression detected: 4.25 > 4.08729 (10% above 7-day avg)
 Analyzing: "0002-local-contrast-cpu"
 2026-05-19 05:34:44,Regression detected: 4.97 > 4.79914 (10% above 7-day avg)
 Analyzing: "0003-denoise-bilateral-cpu"
@@ -87,6 +88,7 @@ Analyzing: "0084-cacorrect-cpu"
 Analyzing: "0085-channelmixerrgb-cpu"
 Analyzing: "0086-diffuse-cpu"
 2026-05-22 05:52:43,Regression detected: 8.19 > 7.843 (10% above 7-day avg)
+2026-05-23 05:50:54,Regression detected: 13.70 > 9.042 (10% above 7-day avg)
 Analyzing: "0087-blendif-and-or-cpu"
 Analyzing: "0088-blendif-diff-excl-cpu"
 Analyzing: "0089-blurs-cpu"

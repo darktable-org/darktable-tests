@@ -6,6 +6,7 @@ Analyzing: "0002-local-contrast-cpu"
 Analyzing: "0003-denoise-bilateral-cpu"
 Analyzing: "0004-masks-cpu"
 Analyzing: "0005-orientation-minus-90-cpu"
+2026-05-26 05:35:34,Regression detected: 3.97 > 3.96629 (10% above 7-day avg)
 Analyzing: "0006-orientation-plus-90-cpu"
 Analyzing: "0007-orientation-180-cpu"
 Analyzing: "0008-flip-h-cpu"

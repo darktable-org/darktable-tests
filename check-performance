@@ -31,7 +31,7 @@ for cmd in $COMMANDS; do
         if (N > 7) {
             for (i = 8; i <= N; i++) {
                 sum = 0;
-                for (j = i-7; j <= i; j++) sum += times[j];
+                for (j = i-6; j <= i; j++) sum += times[j];
                 avg = sum / 7;
                 if (times[i] > avg * 1.1) {
                     print dates[i], "Regression detected: " times[i] " > " avg * 1.1 " (10% above 7-day avg)" >> "'"$PERF_ANALYZE"'"

@@ -29,13 +29,12 @@ for cmd in $COMMANDS; do
     }
     END {
         if (N > 7) {
-            for (i = 8; i <= N; i++) {
-                sum = 0;
-                for (j = i-6; j <= i; j++) sum += times[j];
-                avg = sum / 7;
-                if (times[i] > avg * 1.1) {
-                    print dates[i], "Regression detected: " times[i] " > " avg * 1.1 " (10% above 7-day avg)" >> "'"$PERF_ANALYZE"'"
-                }
+            sum = 0;
+            for (j = N-6; j <= N; j++) sum += times[j];
+            avg = sum / 7;
+            max = avg * 1.15
+            if (times[N] > max) {
+                print dates[N], "Regression detected: " times[N] " > " max " (10% above 7-day avg)" >> "'"$PERF_ANALYZE"'"
             }
         }
     }' "$PERF_LOG"

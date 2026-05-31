@@ -1,13 +1,23 @@
 Analyzing: "0000-nop-cpu"
+2026-05-22 05:34:24,Regression detected: 3.64 > 3.59857 (10% above 7-day avg)
+2026-05-30 05:34:23,Regression detected: 3.81 > 3.71957 (10% above 7-day avg)
 Analyzing: "0001-exposure-cpu"
-2026-05-23 05:34:38,Regression detected: 4.25 > 4.08729 (10% above 7-day avg)
+2026-05-17 05:34:25,Regression detected: 3.52 > 3.28429 (10% above 7-day avg)
+2026-05-23 05:34:38,Regression detected: 4.25 > 3.62214 (10% above 7-day avg)
 Analyzing: "0002-local-contrast-cpu"
-2026-05-19 05:34:44,Regression detected: 4.97 > 4.79914 (10% above 7-day avg)
+2026-05-19 05:34:44,Regression detected: 4.97 > 4.257 (10% above 7-day avg)
 Analyzing: "0003-denoise-bilateral-cpu"
 Analyzing: "0004-masks-cpu"
+2026-05-18 05:35:18,Regression detected: 3.85 > 3.76043 (10% above 7-day avg)
 Analyzing: "0005-orientation-minus-90-cpu"
-2026-05-26 05:35:34,Regression detected: 3.97 > 3.96629 (10% above 7-day avg)
+2026-05-19 05:35:30,Regression detected: 3.38 > 3.33457 (10% above 7-day avg)
+2026-05-20 05:35:29,Regression detected: 3.61 > 3.44929 (10% above 7-day avg)
+2026-05-26 05:35:34,Regression detected: 3.97 > 3.43514 (10% above 7-day avg)
+2026-05-28 05:35:46,Regression detected: 3.70 > 3.52786 (10% above 7-day avg)
 Analyzing: "0006-orientation-plus-90-cpu"
+2026-05-19 05:35:42,Regression detected: 3.35 > 3.23243 (10% above 7-day avg)
+2026-05-20 05:35:41,Regression detected: 3.32 > 3.31257 (10% above 7-day avg)
+2026-05-26 05:35:46,Regression detected: 3.31 > 3.28114 (10% above 7-day avg)
 Analyzing: "0007-orientation-180-cpu"
 Analyzing: "0008-flip-h-cpu"
 Analyzing: "0009-flip-v-cpu"
@@ -83,15 +93,21 @@ Analyzing: "0078-basecurve-fusion-cpu"
 Analyzing: "0079-toneequal-gf-cpu"
 Analyzing: "0080-toneequal-eigf-cpu"
 Analyzing: "0081-mask-groups-cpu"
+2026-05-17 05:49:32,Regression detected: 3.:0 > 3.96786 (10% above 7-day avg)
+2026-05-18 05:49:57,Regression detected: 4.05 > 4.01657 (10% above 7-day avg)
 Analyzing: "0082-demosaic-rcd-cpu"
 Analyzing: "0083-colorbalancergb-cpu"
 Analyzing: "0084-cacorrect-cpu"
 Analyzing: "0085-channelmixerrgb-cpu"
 Analyzing: "0086-diffuse-cpu"
-2026-05-22 05:52:43,Regression detected: 8.19 > 7.843 (10% above 7-day avg)
-2026-05-23 05:50:54,Regression detected: 13.70 > 9.042 (10% above 7-day avg)
+2026-05-22 05:52:43,Regression detected: 8.19 > 6.88914 (10% above 7-day avg)
+2026-05-23 05:50:54,Regression detected: 13.70 > 8.11486 (10% above 7-day avg)
+2026-05-31 05:51:44,Regression detected: 9.64 > 7.15629 (10% above 7-day avg)
 Analyzing: "0087-blendif-and-or-cpu"
+2026-05-22 05:52:56,Regression detected: 3.96 > 3.69757 (10% above 7-day avg)
+2026-05-23 05:51:07,Regression detected: 3.82 > 3.81386 (10% above 7-day avg)
 Analyzing: "0088-blendif-diff-excl-cpu"
+2026-05-23 05:51:18,Regression detected: 3.89 > 3.586 (10% above 7-day avg)
 Analyzing: "0089-blurs-cpu"
 Analyzing: "0090-mask-combine-cpu"
 Analyzing: "0091-mask-combine-intersection-inverted-cpu"
@@ -108,8 +124,18 @@ Analyzing: "0101-lowpass-gaussian-cpu"
 Analyzing: "0102-censorize-cpu"
 Analyzing: "0103-almost-all-cpu"
 Analyzing: "0104-legacy-filmic-cpu"
+2026-05-18 05:55:15,Regression detected: 3.69 > 3.674 (10% above 7-day avg)
+2026-05-19 05:56:43,Regression detected: 4.06 > 3.81543 (10% above 7-day avg)
+2026-05-27 06:02:05,Regression detected: 3.94 > 3.74157 (10% above 7-day avg)
+2026-05-29 06:01:29,Regression detected: 3.98 > 3.87514 (10% above 7-day avg)
 Analyzing: "0105-colorbalance-legacy-cpu"
 Analyzing: "0106-colorbalance-lgg-cpu"
+2026-05-17 05:55:19,Regression detected: 2.:0 > 2.95271 (10% above 7-day avg)
+2026-05-18 05:55:34,Regression detected: 3.08 > 2.97314 (10% above 7-day avg)
+2026-05-19 05:57:05,Regression detected: 3.30 > 3.025 (10% above 7-day avg)
+2026-05-20 05:54:47,Regression detected: 3.07 > 3.04229 (10% above 7-day avg)
+2026-05-27 06:02:34,Regression detected: 3.38 > 3.37543 (10% above 7-day avg)
+2026-05-29 06:01:58,Regression detected: 3.61 > 3.31257 (10% above 7-day avg)
 Analyzing: "0107-colorin-gamma-cpu"
 Analyzing: "0108-colorin-clip-cpu"
 Analyzing: "0109-colorin-gamma-and-clip-cpu"
@@ -149,6 +175,7 @@ Analyzing: "0142-filmicrgb-v6-euclidean-cpu"
 Analyzing: "0143-denoiseprofiled-wave-rgb-cpu"
 Analyzing: "0144-masks-combine-sum-cpu"
 Analyzing: "0145-lens-metadata-xtransIV-modversion-6-cpu"
+2026-05-17 06:02:00,Regression detected: 9.63 > 9.57314 (10% above 7-day avg)
 Analyzing: "0146-lens-metadata-xtransIV-modversion-7-cpu"
 Analyzing: "0147-liquify-grow-shrink-cpu"
 Analyzing: "0148-filmicv7-gamut-mapping-cpu"
@@ -158,7 +185,12 @@ Analyzing: "0151-sigmoid-no-hue-preservation-cpu"
 Analyzing: "0152-rgb-primaries-cpu"
 Analyzing: "0153-hl-reconstruct-filmicrgb-cpu"
 Analyzing: "0154-framing-100-cpu"
+2026-05-22 06:08:34,Regression detected: 4.30 > 4.114 (10% above 7-day avg)
+2026-05-23 06:05:09,Regression detected: 4.23 > 4.22086 (10% above 7-day avg)
+2026-05-24 06:06:13,Regression detected: 4.29 > 4.25229 (10% above 7-day avg)
 Analyzing: "0155-framing-line-169-cpu"
+2026-05-22 06:08:49,Regression detected: 4.27 > 3.97886 (10% above 7-day avg)
+2026-05-24 06:06:26,Regression detected: 4.34 > 4.11243 (10% above 7-day avg)
 Analyzing: "0156-exposure-guided-filter-new-feather-cpu"
 Analyzing: "0157-enlarge-canvas-cpu"
 Analyzing: "0158-coloreq-no-guided-filter-cpu"
@@ -174,10 +206,18 @@ Analyzing: "0167-raster-mask-cpu"
 Analyzing: "0168-lut3d-srgb-pyramid-cpu"
 Analyzing: "0169-lut3d-adobe-trilinear-cpu"
 Analyzing: "0170-lut3d-prophoto-tetrahedral-cpu"
+2026-05-17 06:06:54,Regression detected: 2.99 > 2.97943 (10% above 7-day avg)
+2026-05-18 06:06:50,Regression detected: 3.01 > 2.98257 (10% above 7-day avg)
+2026-05-19 06:09:10,Regression detected: 3.00 > 2.981 (10% above 7-day avg)
 Analyzing: "0171-capture-sharpen-cpu"
 Analyzing: "0172-capture-dual-rcd-cpu"
 Analyzing: "0173-capture-dual-markesteijn-cpu"
 Analyzing: "0174-agx-default-cpu"
+2026-05-30 06:03:35,Regression detected: 3.:0 > 3.95214 (10% above 7-day avg)
+2026-05-31 06:08:47,Regression detected: 3.97 > 3.949 (10% above 7-day avg)
 Analyzing: "0175-agx-cpu"
+2026-05-25 06:10:56,Regression detected: 3.:0 > 3.92071 (10% above 7-day avg)
+2026-05-26 06:10:48,Regression detected: 3.99 > 3.92071 (10% above 7-day avg)
+2026-05-27 06:20:24,Regression detected: 4.07 > 3.938 (10% above 7-day avg)
 Analyzing: "0176-color-harmonizer-cpu"
 Analyzing: "0177-bayer4-cpu"

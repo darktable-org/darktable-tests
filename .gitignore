@@ -1,3 +1,4 @@
 diff*png
 output*png
 logs/
+.venv/

@@ -8,8 +8,8 @@
 #
 # To run the test suite:
 #
-#   ./run.sh               - will run all tests
-#   ./run.sh 0001-exposure - will run the single tests 0001-exposure
+#   ./run                  - will run all tests
+#   ./run 0001-exposure    - will run the single test 0001-exposure
 #
 # Options:
 #
@@ -20,6 +20,28 @@
 #   --op=<n> | --operation=<n> - run test with matching operation n
 
 CDPATH=
+
+# The helper scripts (deltae, count-diff-pixels) need a few Python modules,
+# see requirements.txt. They are installed into a virtual environment which is
+# created on first use and activated below.
+#
+#   DARKTABLE_TESTS_VENV - use another location than ./.venv
+#   NO_VENV=1            - do not use a virtual environment at all, the
+#                          modules are then expected to be already available
+
+VENV=${DARKTABLE_TESTS_VENV:-$PWD/.venv}
+
+if [[ -z $NO_VENV ]]; then
+    if [[ ! -f $VENV/bin/activate ]]; then
+        echo "Creating Python virtual environment in $VENV"
+        python3 -m venv "$VENV" ||
+            { echo "error: cannot create $VENV"; exit 1; }
+        "$VENV"/bin/python -m pip install --quiet --upgrade pip &&
+            "$VENV"/bin/python -m pip install --quiet -r "$PWD/requirements.txt" ||
+                { echo "error: cannot install $PWD/requirements.txt"; exit 1; }
+    fi
+    source "$VENV"/bin/activate
+fi
 
 # If DARKTABLE_CLI not set and darktable-cli not found in the PATH but found
 # in standard installation /opt/darktable, use it.

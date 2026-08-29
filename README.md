@@ -1,80 +1,111 @@
-darktable is an open source photography workflow application and
-non-destructive raw developer. A virtual lighttable and darkroom for
-photographers. It manages your digital negatives in a database, lets
-you view them through a zoomable lighttable and enables you to develop
-raw images, enhance them and export them on local or remote storage.
+# darktable integration tests
 
-This repository hosts the darktable integration tests.
+This repository hosts the [darktable](https://www.darktable.org/)
+integration tests. Each test renders a raw image from `images/` through a
+fixed XMP sidecar with `darktable-cli` and compares the result against a
+committed reference image, both on the CPU and the OpenCL path.
 
-# Structure
-
-```
-images/     : a directory containing test images
-
-run.sh      : main driver
-
-deltae      : python script to compute a delta-E between 2 images
-              expected.jpg and output.jpg
-
-nnnn-name/  : tests
-```
-
-Needed tools : zopflipng
-
-
-# How to add a new test (using default driver)
-
-1. Create a new directory
+## Test setup
 
 ```
-   <nnnn>-<meaningful name>
+run                : main driver, runs the tests
+requirements.txt   : Python dependencies of the helper scripts
+
+deltae             : CIE 2000 delta-E report between two images (Python)
+count-diff-pixels  : number of differing pixels between two images (Python)
+check-performance  : reports timing regressions from logs/perfs.log
+check-failures     : interactive review of the failures of a log
+check-cpu-gpu      : refreshes the cpugpu.maxpix thresholds from a log
+
+images/            : test images
+logs/              : run logs, timings (perfs.log) and their analysis
+nnnn-name/         : one test
 ```
 
-2. Start darktable, open one test image (or add a new one if needed)
+A test directory contains:
 
-3. Do a dev using whatever module
+| file               |                                                        |
+|--------------------|--------------------------------------------------------|
+| `<name>.xmp`       | the sidecar to apply, names the image via `DerivedFrom` |
+| `expected.png`     | the reference output, created on the first run          |
+| `cpugpu.maxpix`    | max tolerated CPU/GPU pixel difference                  |
+| `CONFIG`           | optional, one extra `darktable-cli` conf option per line|
+| `README`           | optional, first line is a label shown next to the test  |
+| `test.sh`          | optional, replaces the default driver, returns 0 if OK  |
 
-4. Copy the resulting .xmp into <nnnn>-<meaningful name>
+A test passes when the max delta-E against `expected.png` stays below 2.3
+(and the average below 2.3/3).
 
-   And rename it ```<meaningful name>.xmp```
+### Requirements
 
-5. Add a README (optional)
+* `darktable-cli`, found either in the `PATH`, through the `DARKTABLE_CLI`
+  environment variable, or in `/opt/darktable`
+* `compare` (ImageMagick), for the diff images
+* `zopflipng`, only needed to create the `expected.png` of a new test
+* `loupe`, only needed by `check-failures`
+* Python 3 with the modules listed in `requirements.txt`
 
-   First line is a short label that will be added next to the
-   test name. This can be used to give specific description for
-   a test (like an unstable test across computers).
+### Python virtual environment
 
-   The rest of the README can contain a long description if
-   needed.
+`deltae` and `count-diff-pixels` need a few Python modules. `./run` creates
+the virtual environment `.venv` on its first run, installs
+`requirements.txt` into it and activates it, so there is nothing to do.
 
-6. Add a CONFIG (optional)
-
-   The config file must contain one darktable-cli option per
-   line. Each option has the same format as the ones found in
-   darktablerc.
-
-7. Do a first run of the test to get the expected output
+To create it by hand, or to use the scripts outside of `./run`:
 
 ```bash
-   ./run <dir>
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-   The output.png will be copied to expected.png, double check that
-   expected.png is correct and really the expected output.
+Two environment variables control this:
 
-8. Test that all is ok by running:
-
-
-```bash
-   ./run <dir>
+```
+DARKTABLE_TESTS_VENV   use another location than ./.venv
+NO_VENV=1              do not use a virtual environment, the modules are
+                       then expected to be already available
 ```
 
-   All values must be 0 as there is no change in darktable, so the
-   expected output should be exactly the same image as the output.
+## Running the tests
 
 ```bash
-   ./run.sh 0001-exposure
+./run                     # all tests
+./run 0001-exposure       # a single test
+./run --op=exposure       # all tests using that module
+```
 
+Options:
+
+```
+--disable-opencl           do not run the OpenCL path
+--disable-timing           do not output timing
+--no-deltae                light check, does not need the delta-E module
+--fast-fail                stop on the first failing test
+--op=<n> | --operation=<n> run the tests with matching operation n
+--gdb | --gdb-cl           run the CPU / OpenCL path under gdb
+```
+
+Every run writes `logs/test-<date>.log`, appends the timings to
+`logs/perfs.log` and finally reports timing regressions. To review the
+failures of a run:
+
+```bash
+./check-failures logs/test-<date>.log
+```
+
+## Adding a test with the default driver
+
+1. Create the directory `<nnnn>-<meaningful name>`.
+2. Develop one of the test images in darktable, then copy its XMP into that
+   directory as `<meaningful name>.xmp`.
+3. Optionally add a `README` and a `CONFIG` (see the table above).
+4. Run `./run <dir>` a first time: as there is no `expected.png` yet, the
+   output is optimized with `zopflipng` and saved as the reference. Check
+   that it really is the expected output.
+5. Run `./run <dir>` again, everything must now be 0:
+
+```
 Test 0001-exposure
       Image mire1.cr2
       CPU & GPU version differ by 25699 pixels
@@ -83,30 +114,14 @@ Test 0001-exposure
       Avg dE                   : 0.00000
       Std dE                   : 0.00000
       ----------------------------------
-      Pixels below avg + 0 std : 100.00 %
-      Pixels below avg + 1 std : 100.00 %
-      Pixels below avg + 3 std : 100.00 %
-      Pixels below avg + 6 std : 100.00 %
-      Pixels below avg + 9 std : 100.00 %
-      ----------------------------------
+      ...
       Pixels above tolerance   : 0.00 %
   OK
 ```
 
-9. If all goes well commit the .xmp and expected.png files
+6. Commit the `.xmp` and the `expected.png`.
 
+## Adding a test with a specific driver
 
-
-# How to add a new test (using specific driver)
-
-1. Create a new directory
-
-```
-   <nnnn>-<meaningful name>
-```
-
-2. Create a file named test.sh into this directory
-
-   This test.sh is a specific driver that can do whatever is necessary
-   for the test. At the end the driver must return 0 if all is OK and
-   1 otherwise.
+Create `<nnnn>-<meaningful name>/test.sh` instead. It may do whatever the
+test needs and must return 0 when the test passes, 1 otherwise.

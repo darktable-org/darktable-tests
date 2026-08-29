@@ -1,0 +1,25 @@
+# Python dependencies of the darktable integration test suite.
+#
+#   python3 -m venv .venv
+#   . .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# The ./run script creates and activates .venv automatically.
+
+# deltae: colour.read_image() and colour.delta_E(..., method="CIE 2000")
+colour-science>=0.4.4
+
+# pulled in by colour-science, listed explicitly as the scripts import them
+numpy>=1.24
+scipy>=1.10
+imageio>=2.9
+
+# count-diff-pixels
+pillow>=9.0
+
+# deltae: colour-science version check
+packaging>=20.0
+
+# optional for colour-science, but without it every deltae call prints
+# a ColourUsageWarning about the missing "Matplotlib" API features
+matplotlib>=3.7

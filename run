@@ -79,28 +79,30 @@ function call()
     fi
 }
 
+# sets the global DIFFPIX rather than taking a nameref, as bash 3.2
+# (the system bash on macOS) has no "local -n"
 function get-diff()
 {
-    local -n _NBPIX=$1
-    local FROM=$2
-    local TO=$3
-    local DIFF=$4
+    local FROM=$1
+    local TO=$2
+    local DIFF=$3
 
-    _NBPIX=0
+    DIFFPIX=0
 
     # compute diff image
     $COMPARE -metric AE $FROM $TO $DIFF 1>/dev/null 2>&1
 
     # compute pixels diff
     [[ -f $FROM ]] &&
-        _NBPIX=$(../count-diff-pixels $FROM $TO)
+        DIFFPIX=$(../count-diff-pixels $FROM $TO)
 
-    [[ "${_NBPIX}" == 0 ]] && return 0 || return 1
+    [[ "${DIFFPIX}" == 0 ]] && return 0 || return 1
 }
 
 [[ -z $(command -v $CLI) ]] && echo Make sure $CLI is in the path && exit 1
 
-set -- $(getopt -q -u -o : -l gdb,gdb-cl,disable-opencl,disable-timing,no-deltae,fast-fail,op:,operation: -- "$@")
+# parsed by hand: BSD getopt, which is what macOS ships, has no long
+# options and would turn every switch below into a bogus test name
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -128,7 +130,15 @@ while [[ $# -gt 0 ]]; do
             TESTS=$(grep -l "operation=\"$OP\"" */*.xmp | while read -r xmp; do echo $(dirname $xmp); done)
             [[ -z "$TESTS" ]] && echo error: operation $OP did not match any test && exit 1
             ;;
+        --op=*|--operation=*)
+            OP=${1#*=}
+            TESTS=$(grep -l "operation=\"$OP\"" */*.xmp | while read -r xmp; do echo $(dirname $xmp); done)
+            [[ -z "$TESTS" ]] && echo error: operation $OP did not match any test && exit 1
+            ;;
         (--)
+            ;;
+        (-*)
+            echo error: unknown option $1 && exit 1
             ;;
         (*)
             TESTS="$TESTS $(basename $1)"
@@ -270,7 +280,7 @@ for dir in $TESTS; do
 
             if [[ $res -eq 0 ]]; then
                 if [[ -n "$COMPARE" ]] && [[ $DO_OPENCL == yes ]]; then
-                    get-diff DIFFPIX output.png output-cl.png diff-cl.png
+                    get-diff output.png output-cl.png diff-cl.png
 
                     if [[ $? -ne 0 ]]; then
                         e "      CPU & GPU version differ by ${DIFFPIX} pixels"
@@ -308,14 +318,14 @@ for dir in $TESTS; do
                     if [[ $res -lt 2 ]]; then
                         e "  OK"
                         if [[ $res = 1 ]]; then
-                            get-diff DIFFPIX expected.png output.png diff-ok.png
+                            get-diff expected.png output.png diff-ok.png
                         fi
                         res=0
 
                     else
                         e "  FAILS: image visually changed"
                         if [[ ! -z $COMPARE ]] && [[ -f expected.png ]]; then
-                            get-diff DIFFPIX expected.png output.png diff.png
+                            get-diff expected.png output.png diff.png
                             e "         see diff.png for visual difference"
 			    e "         (${DIFFPIX} pixels changed)"
                         fi
@@ -325,7 +335,7 @@ for dir in $TESTS; do
                         e "no delta-e mode : required compare tool not found."
                         res=1
                     else
-                        get-diff DIFFPIX expected.png output.png diff-ok.png
+                        get-diff expected.png output.png diff-ok.png
 
                         # if we have an exponent just pretend this is a number
                         # above 5000 which is the limit checked below.

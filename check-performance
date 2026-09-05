@@ -42,7 +42,9 @@ done
 
 # Finaly remove entries older than 6 months
 
-SIX_MONTHS_AGO=$(date -d "6 months ago" +"%Y-%m-%d")
+# GNU date first, then the BSD spelling used by macOS
+SIX_MONTHS_AGO=$(date -d "6 months ago" +"%Y-%m-%d" 2>/dev/null ||
+                     date -v-6m +"%Y-%m-%d")
 awk -v cutoff="$SIX_MONTHS_AGO" '$1 >= cutoff' $PERF_LOG > tmpfile &&
     mv tmpfile $PERF_LOG
 

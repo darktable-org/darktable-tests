@@ -13,9 +13,13 @@ def count_different_pixels_numpy(image_path1, image_path2, threshold=0):
     if img1.size != img2.size:
         raise ValueError("Images must have the same dimensions")
 
-    # Convert images to NumPy arrays
-    arr1 = np.array(img1)
-    arr2 = np.array(img2)
+    # Convert images to NumPy arrays. int16, not the uint8 PIL hands back:
+    # on uint8 the subtraction below wraps, so a -1 difference becomes 255 and
+    # every threshold comparison reads it as a large difference. Harmless at
+    # the default threshold of 0 (any nonzero difference counts either way),
+    # which is why this went unnoticed, but it made --threshold unusable.
+    arr1 = np.array(img1, dtype=np.int16)
+    arr2 = np.array(img2, dtype=np.int16)
 
     # Calculate absolute difference for each channel
     diff = np.abs(arr1 - arr2)

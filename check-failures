@@ -6,11 +6,21 @@
         exit 1
     }
 
+# loupe is the GNOME image viewer; fall back to whatever the desktop
+# offers, so this is usable outside a GNOME session
+VIEWER=$(command -v loupe || command -v xdg-open || command -v open)
+
+[[ -z $VIEWER ]] &&
+    {
+        echo "error: no image viewer found (loupe, xdg-open or open)"
+        exit 1
+    }
+
 function display()
 {
     local FILE=$1
 
-    loupe $FILE > /dev/null 2>&1 &
+    $VIEWER $FILE > /dev/null 2>&1 &
 }
 
 function display-report()
@@ -33,7 +43,7 @@ function display-report()
 
 function clear-display()
 {
-    killall loupe
+    killall $(basename $VIEWER) 2>/dev/null
 }
 
 function analyze()

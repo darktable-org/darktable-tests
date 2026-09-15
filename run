@@ -231,6 +231,21 @@ for dir in $TESTS; do
 
             e "      Image $IMAGE"
 
+            # A .dtdata sidecar shipped with the test is
+            # looked up next to the image, so place it there for the run
+            # and remove it whatever the outcome.
+
+            SIDECAR=$TEST_IMAGES/$IMAGE.dtdata
+
+            if [[ -f $TEST.dtdata ]]; then
+                if [[ -f $SIDECAR ]]; then
+                    e "  FAILS: stale $SIDECAR, remove it first"
+                    exit 1
+                fi
+                cp "$TEST.dtdata" "$SIDECAR"
+                trap 'rm -f "$SIDECAR"' EXIT
+            fi
+
             # Remove previous output and diff if any
 
             rm -f output*.png diff*.png

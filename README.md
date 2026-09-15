@@ -27,6 +27,7 @@ A test directory contains:
 | file               |                                                        |
 |--------------------|--------------------------------------------------------|
 | `<name>.xmp`       | the sidecar to apply, names the image via `DerivedFrom` |
+| `<name>.dtdata`    | optional, `.dtdata` sidecar placed next to the image for the run |
 | `expected.png`     | the reference output, created on the first run          |
 | `cpugpu.maxpix`    | max tolerated CPU/GPU pixel difference                  |
 | `CONFIG`           | optional, one extra `darktable-cli` conf option per line|
@@ -99,7 +100,8 @@ failures of a run:
 1. Create the directory `<nnnn>-<meaningful name>`.
 2. Develop one of the test images in darktable, then copy its XMP into that
    directory as `<meaningful name>.xmp`.
-3. Optionally add a `README` and a `CONFIG` (see the table above).
+3. Optionally add a `README`, a `CONFIG` and a `<meaningful name>.dtdata`
+   (see the table above).
 4. Run `./run <dir>` a first time: as there is no `expected.png` yet, the
    output is optimized with `zopflipng` and saved as the reference. Check
    that it really is the expected output.

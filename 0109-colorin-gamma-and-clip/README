@@ -1,0 +1,5 @@
+HLG P3 input with sRGB gamut clipping
+
+This reference uses the corrected HLG decoding from darktable PR #22516,
+including the RGB-dependent OOTF and 203 nit reference white. The final
+colorin history entry selects HLG P3; this is an HDR input test.

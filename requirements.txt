@@ -6,7 +6,7 @@
 #
 # The ./run script creates and activates .venv automatically.
 
-# deltae: colour.read_image() and colour.delta_E(..., method="CIE 2000")
+# deltae.py: colour.read_image() and colour.delta_E(..., method="CIE 2000")
 colour-science>=0.4.4
 
 # pulled in by colour-science, listed explicitly as the scripts import them
@@ -17,9 +17,9 @@ imageio>=2.9
 # count-diff-pixels
 pillow>=9.0
 
-# deltae: colour-science version check
+# deltae.py: colour-science version check
 packaging>=20.0
 
-# optional for colour-science, but without it every deltae call prints
+# optional for colour-science, but without it every deltae.py call prints
 # a ColourUsageWarning about the missing "Matplotlib" API features
 matplotlib>=3.7

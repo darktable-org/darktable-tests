@@ -2,3 +2,6 @@ diff*png
 output*png
 logs/
 .venv/
+
+# compiled from deltae.c by ./run
+deltae

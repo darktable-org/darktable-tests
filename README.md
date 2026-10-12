@@ -11,7 +11,8 @@ committed reference image, both on the CPU and the OpenCL path.
 run                : main driver, runs the tests
 requirements.txt   : Python dependencies of the helper scripts
 
-deltae             : CIE 2000 delta-E report between two images (Python)
+deltae             : CIE 2000 delta-E report between two images (C helper,
+                     built from deltae.c by ./run; deltae.py is the fallback)
 count-diff-pixels  : number of differing pixels between two images (Python)
 check-performance  : reports timing regressions from logs/perfs.log
 check-failures     : interactive review of the failures of a log
@@ -44,10 +45,12 @@ A test passes when the max delta-E against `expected.png` stays below 2.3
 * `zopflipng`, only needed to create the `expected.png` of a new test
 * `loupe`, only needed by `check-failures`
 * Python 3 with the modules listed in `requirements.txt`
+* a C compiler and `libpng` (pkg-config module `libpng`), to build the C
+  `deltae`; without them `./run` falls back to the Python `deltae.py`
 
 ### Python virtual environment
 
-`deltae` and `count-diff-pixels` need a few Python modules. `./run` creates
+`deltae.py` and `count-diff-pixels` need a few Python modules. `./run` creates
 the virtual environment `.venv` on its first run, installs
 `requirements.txt` into it and activates it, so there is nothing to do.
 

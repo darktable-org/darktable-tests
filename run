@@ -21,8 +21,37 @@
 
 CDPATH=
 
-# The helper scripts (deltae, count-diff-pixels) need a few Python modules,
-# see requirements.txt. They are installed into a virtual environment which is
+# The delta-E report has a C implementation (deltae.c) which is much faster
+# than the Python one (deltae.py). Build it on first use when a compiler and
+# libpng are available, and fall back to the Python helper otherwise.
+#
+#   NO_DELTAE_C=1        - always use the Python helper
+
+DELTAE=$PWD/deltae.py
+
+function build-deltae()
+{
+    local src=$PWD/src/deltae.c
+    local bin=$PWD/deltae
+
+    [[ -f $src ]] || return 1
+    [[ -x $bin && $bin -nt $src ]] && return 0
+    command -v "${CC:-cc}" >/dev/null 2>&1 || return 1
+
+    "${CC:-cc}" -O2 -std=c99 -o "$bin" "$src" \
+        $(pkg-config --cflags --libs libpng 2>/dev/null) -lm 2>/dev/null || return 1
+    return 0
+}
+
+# Build deltae and disable venv if successful
+
+[[ -z $NO_DELTAE_C ]] &&
+    build-deltae &&
+    DELTAE=$PWD/deltae &&
+    NO_VENV=1
+
+# The Python helpers (deltae.py, count-diff-pixels) need a few modules, see
+# requirements.txt. They are installed into a virtual environment which is
 # created on first use and activated below.
 #
 #   DARKTABLE_TESTS_VENV - use another location than ./.venv
@@ -320,16 +349,18 @@ for dir in $TESTS; do
 
                         if [[ $DO_DELTAE == yes ]]; then
                             e "      CPU vs. GPU report :"
-                            ../deltae output.png output-cl.png | tee -a $LOG
+                            $DELTAE output.png output-cl.png | tee -a $LOG
                             e " "
                         fi
+                    else
+                        e "      No diff CPU & GPU fully equivalent"
                     fi
                 fi
 
                 if [[ $DO_DELTAE == yes ]]; then
                     if [[ -f expected.png ]]; then
                         e "      Expected CPU vs. current CPU report :"
-                        ../deltae expected.png output.png | tee -a $LOG
+                        $DELTAE expected.png output.png | tee -a $LOG
                         res=${PIPESTATUS[0]}
                         e " "
                     else

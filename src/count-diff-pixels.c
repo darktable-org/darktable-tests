@@ -13,6 +13,10 @@
  *    PIL's convert("RGB") hands the Python helper. A channel difference is
  *    computed in int, not on unsigned bytes, so a -1 difference is 1 and not
  *    255.
+ *
+ *    Built with -fopenmp the two images are decoded concurrently and the
+ *    comparison is split across threads; without the flag the pragmas are
+ *    ignored and it runs single-threaded.
  */
 
 #include <png.h>
@@ -145,14 +149,21 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  const image_t a = read_png(paths[0]);
-  const image_t b = read_png(paths[1]);
+  image_t a, b;
+#pragma omp parallel sections
+  {
+#pragma omp section
+    a = read_png(paths[0]);
+#pragma omp section
+    b = read_png(paths[1]);
+  }
 
   if(a.width != b.width || a.height != b.height)
     fail("images must have the same dimensions");
 
   long long count = 0;
 
+#pragma omp parallel for reduction(+ : count) schedule(static)
   for(unsigned int y = 0; y < a.height; y++)
   {
     const unsigned char *ra = a.data + (size_t)y * a.rowbytes;

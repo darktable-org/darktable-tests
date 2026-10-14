@@ -23,7 +23,8 @@ CDPATH=
 
 # The delta-E report has a C implementation (deltae.c) which is much faster
 # than the Python one (deltae.py). Build it on first use when a compiler and
-# libpng are available, and fall back to the Python helper otherwise.
+# libpng are available, and fall back to the Python helper otherwise. When the
+# compiler supports OpenMP the build is multithreaded.
 #
 #   NO_DELTAE_C=1        - always use the Python helper
 
@@ -38,8 +39,11 @@ function build-deltae()
     [[ -x $bin && $bin -nt $src ]] && return 0
     command -v "${CC:-cc}" >/dev/null 2>&1 || return 1
 
-    "${CC:-cc}" -O2 -std=c99 -o "$bin" "$src" \
-        $(pkg-config --cflags --libs libpng 2>/dev/null) -lm 2>/dev/null || return 1
+    local libs=$(pkg-config --cflags --libs libpng 2>/dev/null)
+
+    # an OpenMP build is faster, but a compiler without OpenMP is not fatal
+    "${CC:-cc}" -O2 -std=c99 -fopenmp -o "$bin" "$src" $libs -lm 2>/dev/null ||
+        "${CC:-cc}" -O2 -std=c99 -o "$bin" "$src" $libs -lm 2>/dev/null || return 1
     return 0
 }
 
@@ -52,7 +56,8 @@ function build-deltae()
 # The pixel-diff count has a C implementation (count-diff-pixels.c) which is
 # much faster than the Python one (count-diff-pixels.py). Build it on first
 # use when a compiler and libpng are available, and fall back to the Python
-# helper otherwise.
+# helper otherwise. When the compiler supports OpenMP the build is
+# multithreaded.
 #
 #   NO_COUNT_DIFF_PIXELS_C=1   - always use the Python helper
 
@@ -67,8 +72,11 @@ function build-count-diff-pixels()
     [[ -x $bin && $bin -nt $src ]] && return 0
     command -v "${CC:-cc}" >/dev/null 2>&1 || return 1
 
-    "${CC:-cc}" -O2 -std=c99 -o "$bin" "$src" \
-        $(pkg-config --cflags --libs libpng 2>/dev/null) -lm 2>/dev/null || return 1
+    local libs=$(pkg-config --cflags --libs libpng 2>/dev/null)
+
+    # an OpenMP build is faster, but a compiler without OpenMP is not fatal
+    "${CC:-cc}" -O2 -std=c99 -fopenmp -o "$bin" "$src" $libs -lm 2>/dev/null ||
+        "${CC:-cc}" -O2 -std=c99 -o "$bin" "$src" $libs -lm 2>/dev/null || return 1
     return 0
 }
 

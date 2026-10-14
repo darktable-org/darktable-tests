@@ -10,6 +10,10 @@
  *    The colour pipeline mirrors colour-science, which the Python helper uses:
  *    sRGB (nonlinear) -> linear -> CIE XYZ (D65) -> CIE Lab (D65), followed by
  *    the CIE 2000 colour difference with parametric factors kL=kC=kH=1.
+ *
+ *    Built with -fopenmp the two images are decoded concurrently and the
+ *    per-pixel work is split across threads; without the flag the pragmas are
+ *    ignored and it runs single-threaded.
  */
 
 #include <math.h>
@@ -247,8 +251,14 @@ int main(int argc, char **argv)
     return 2;
   }
 
-  const image_t expected = read_png(argv[1]);
-  const image_t output = read_png(argv[2]);
+  image_t expected, output;
+#pragma omp parallel sections
+  {
+#pragma omp section
+    expected = read_png(argv[1]);
+#pragma omp section
+    output = read_png(argv[2]);
+  }
 
   if(expected.width != output.width || expected.height != output.height)
   {
@@ -269,6 +279,7 @@ int main(int argc, char **argv)
 
   double sum = 0.0, sumsq = 0.0, maxde = 0.0;
 
+#pragma omp parallel for reduction(+ : sum, sumsq) reduction(max : maxde) schedule(static)
   for(unsigned int y = 0; y < expected.height; y++)
   {
     const unsigned char *re = expected.data + (size_t)y * expected.rowbytes;
@@ -308,6 +319,7 @@ int main(int argc, char **argv)
   const double std = sqrt(var);
 
   long long c0 = 0, c1 = 0, c3 = 0, c6 = 0, c9 = 0, above = 0;
+#pragma omp parallel for reduction(+ : c0, c1, c3, c6, c9, above) schedule(static)
   for(size_t i = 0; i < npix; i++)
   {
     const double d = de[i];

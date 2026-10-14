@@ -50,7 +50,9 @@ A test passes when the max delta-E against `expected.png` stays below 2.3
 * Python 3 with the modules listed in `requirements.txt`
 * a C compiler and `libpng` (pkg-config module `libpng`), to build the C
   `deltae` and `count-diff-pixels`; without them `./run` falls back to the
-  Python `deltae.py` and `count-diff-pixels.py`
+  Python `deltae.py` and `count-diff-pixels.py`. Both are built multithreaded
+  when the compiler supports OpenMP, which makes them noticeably faster on
+  large images; a compiler without OpenMP builds them single-threaded
 
 ### Python virtual environment
 

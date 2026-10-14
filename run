@@ -114,6 +114,9 @@ DO_GDB_CL=no
 
 mkdir -p $LOGDIR
 
+# Make sure we start from a clean config
+rm -fr /tmp/darktable-test
+
 # echo on console and write to log file
 function e()
 {

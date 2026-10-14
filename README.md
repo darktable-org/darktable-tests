@@ -13,7 +13,9 @@ requirements.txt   : Python dependencies of the helper scripts
 
 deltae             : CIE 2000 delta-E report between two images (C helper,
                      built from deltae.c by ./run; deltae.py is the fallback)
-count-diff-pixels  : number of differing pixels between two images (Python)
+count-diff-pixels  : number of differing pixels between two images (C helper,
+                     built from count-diff-pixels.c by ./run;
+                     count-diff-pixels.py is the fallback)
 check-performance  : reports timing regressions from logs/perfs.log
 check-failures     : interactive review of the failures of a log
 check-cpu-gpu      : refreshes the cpugpu.maxpix thresholds from a log
@@ -46,11 +48,12 @@ A test passes when the max delta-E against `expected.png` stays below 2.3
 * `loupe`, only needed by `check-failures`
 * Python 3 with the modules listed in `requirements.txt`
 * a C compiler and `libpng` (pkg-config module `libpng`), to build the C
-  `deltae`; without them `./run` falls back to the Python `deltae.py`
+  `deltae` and `count-diff-pixels`; without them `./run` falls back to the
+  Python `deltae.py` and `count-diff-pixels.py`
 
 ### Python virtual environment
 
-`deltae.py` and `count-diff-pixels` need a few Python modules. `./run` creates
+`deltae.py` and `count-diff-pixels.py` need a few Python modules. `./run` creates
 the virtual environment `.venv` on its first run, installs
 `requirements.txt` into it and activates it, so there is nothing to do.
 

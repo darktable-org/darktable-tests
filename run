@@ -47,10 +47,45 @@ function build-deltae()
 
 [[ -z $NO_DELTAE_C ]] &&
     build-deltae &&
-    DELTAE=$PWD/deltae &&
-    NO_VENV=1
+    DELTAE=$PWD/deltae
 
-# The Python helpers (deltae.py, count-diff-pixels) need a few modules, see
+# The pixel-diff count has a C implementation (count-diff-pixels.c) which is
+# much faster than the Python one (count-diff-pixels.py). Build it on first
+# use when a compiler and libpng are available, and fall back to the Python
+# helper otherwise.
+#
+#   NO_COUNT_DIFF_PIXELS_C=1   - always use the Python helper
+
+COUNTDIFFPIX=$PWD/count-diff-pixels.py
+
+function build-count-diff-pixels()
+{
+    local src=$PWD/src/count-diff-pixels.c
+    local bin=$PWD/count-diff-pixels
+
+    [[ -f $src ]] || return 1
+    [[ -x $bin && $bin -nt $src ]] && return 0
+    command -v "${CC:-cc}" >/dev/null 2>&1 || return 1
+
+    "${CC:-cc}" -O2 -std=c99 -o "$bin" "$src" \
+        $(pkg-config --cflags --libs libpng 2>/dev/null) -lm 2>/dev/null || return 1
+    return 0
+}
+
+# Build C count-diff-pixels
+
+[[ -z $NO_COUNT_DIFF_PIXELS_C ]] &&
+    build-count-diff-pixels &&
+    COUNTDIFFPIX=$PWD/count-diff-pixels
+
+if [[ $DELTAE == $PWD/deltae ]] &&
+       [[ $COUNTDIFFPIX == $PWD/count-diff-pixels ]]; then
+    NO_VENV=1
+else
+    unset NO_VENV
+fi
+
+# The Python helpers (deltae.py, count-diff-pixels.py) need a few modules, see
 # requirements.txt. They are installed into a virtual environment which is
 # created on first use and activated below.
 #
@@ -145,7 +180,7 @@ function get-diff()
 
     # compute pixels diff
     [[ -f $FROM ]] &&
-        DIFFPIX=$(../count-diff-pixels $FROM $TO)
+        DIFFPIX=$($COUNTDIFFPIX $FROM $TO)
 
     [[ "${DIFFPIX}" == 0 ]] && return 0 || return 1
 }

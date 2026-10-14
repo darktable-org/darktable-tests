@@ -5,3 +5,6 @@ logs/
 
 # compiled from deltae.c by ./run
 deltae
+
+# compiled from count-diff-pixels.c by ./run
+count-diff-pixels

@@ -21,14 +21,9 @@
 
 CDPATH=
 
-# The delta-E report has a C implementation (deltae.c) which is much faster
-# than the Python one (deltae.py). Build it on first use when a compiler and
-# libpng are available, and fall back to the Python helper otherwise. When the
-# compiler supports OpenMP the build is multithreaded.
-#
-#   NO_DELTAE_C=1        - always use the Python helper
-
-DELTAE=$PWD/deltae.py
+# Build deltae on first use when a compiler and libpng are available,
+# and fall back to the Python helper otherwise. When the compiler
+# supports OpenMP the build is multithreaded.
 
 function build-deltae()
 {
@@ -49,19 +44,18 @@ function build-deltae()
 
 # Build deltae and disable venv if successful
 
-[[ -z $NO_DELTAE_C ]] &&
-    build-deltae &&
-    DELTAE=$PWD/deltae
+DELTAE=$PWD/deltae
+build-deltae
 
-# The pixel-diff count has a C implementation (count-diff-pixels.c) which is
-# much faster than the Python one (count-diff-pixels.py). Build it on first
-# use when a compiler and libpng are available, and fall back to the Python
-# helper otherwise. When the compiler supports OpenMP the build is
-# multithreaded.
-#
-#   NO_COUNT_DIFF_PIXELS_C=1   - always use the Python helper
+[[ $? == 1 ]] &&
+    {
+        echo Fail to build deltae
+        exit 1
+    }
 
-COUNTDIFFPIX=$PWD/count-diff-pixels.py
+# Build count-diff-pixels on first use when a compiler and libpng are
+# available, and fall back to the Python helper otherwise. When the
+# compiler supports OpenMP the build is multithreaded.
 
 function build-count-diff-pixels()
 {
@@ -82,38 +76,14 @@ function build-count-diff-pixels()
 
 # Build C count-diff-pixels
 
-[[ -z $NO_COUNT_DIFF_PIXELS_C ]] &&
-    build-count-diff-pixels &&
-    COUNTDIFFPIX=$PWD/count-diff-pixels
+COUNTDIFFPIX=$PWD/count-diff-pixels
+build-count-diff-pixels
 
-if [[ $DELTAE == $PWD/deltae ]] &&
-       [[ $COUNTDIFFPIX == $PWD/count-diff-pixels ]]; then
-    NO_VENV=1
-else
-    unset NO_VENV
-fi
-
-# The Python helpers (deltae.py, count-diff-pixels.py) need a few modules, see
-# requirements.txt. They are installed into a virtual environment which is
-# created on first use and activated below.
-#
-#   DARKTABLE_TESTS_VENV - use another location than ./.venv
-#   NO_VENV=1            - do not use a virtual environment at all, the
-#                          modules are then expected to be already available
-
-VENV=${DARKTABLE_TESTS_VENV:-$PWD/.venv}
-
-if [[ -z $NO_VENV ]]; then
-    if [[ ! -f $VENV/bin/activate ]]; then
-        echo "Creating Python virtual environment in $VENV"
-        python3 -m venv "$VENV" ||
-            { echo "error: cannot create $VENV"; exit 1; }
-        "$VENV"/bin/python -m pip install --quiet --upgrade pip &&
-            "$VENV"/bin/python -m pip install --quiet -r "$PWD/requirements.txt" ||
-                { echo "error: cannot install $PWD/requirements.txt"; exit 1; }
-    fi
-    source "$VENV"/bin/activate
-fi
+[[ $? == 1 ]] &&
+    {
+        echo Fail to build count-diff-pixels
+        exit 1
+    }
 
 # If DARKTABLE_CLI not set and darktable-cli not found in the PATH but found
 # in standard installation /opt/darktable, use it.

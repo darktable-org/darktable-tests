@@ -9,17 +9,16 @@ committed reference image, both on the CPU and the OpenCL path.
 
 ```
 run                : main driver, runs the tests
-requirements.txt   : Python dependencies of the helper scripts
 
 deltae             : CIE 2000 delta-E report between two images (C helper,
-                     built from deltae.c by ./run; deltae.py is the fallback)
+                     built from deltae.c by ./run)
 count-diff-pixels  : number of differing pixels between two images (C helper,
-                     built from count-diff-pixels.c by ./run;
-                     count-diff-pixels.py is the fallback)
+                     built from count-diff-pixels.c by ./run)
 check-performance  : reports timing regressions from logs/perfs.log
 check-failures     : interactive review of the failures of a log
 check-cpu-gpu      : refreshes the cpugpu.maxpix thresholds from a log
 
+src/               : source code for helper scripts
 images/            : test images
 logs/              : run logs, timings (perfs.log) and their analysis
 nnnn-name/         : one test
@@ -47,34 +46,10 @@ A test passes when the max delta-E against `expected.png` stays below 2.3
 * `compare` (ImageMagick), for the diff images
 * `zopflipng`, only needed to create the `expected.png` of a new test
 * `loupe`, only needed by `check-failures`
-* Python 3 with the modules listed in `requirements.txt`
 * a C compiler and `libpng` (pkg-config module `libpng`), to build the C
-  `deltae` and `count-diff-pixels`; without them `./run` falls back to the
-  Python `deltae.py` and `count-diff-pixels.py`. Both are built multithreaded
+  `deltae` and `count-diff-pixels`. Both are built multithreaded
   when the compiler supports OpenMP, which makes them noticeably faster on
   large images; a compiler without OpenMP builds them single-threaded
-
-### Python virtual environment
-
-`deltae.py` and `count-diff-pixels.py` need a few Python modules. `./run` creates
-the virtual environment `.venv` on its first run, installs
-`requirements.txt` into it and activates it, so there is nothing to do.
-
-To create it by hand, or to use the scripts outside of `./run`:
-
-```bash
-python3 -m venv .venv
-. .venv/bin/activate
-pip install -r requirements.txt
-```
-
-Two environment variables control this:
-
-```
-DARKTABLE_TESTS_VENV   use another location than ./.venv
-NO_VENV=1              do not use a virtual environment, the modules are
-                       then expected to be already available
-```
 
 ## Running the tests
 

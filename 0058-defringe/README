@@ -1,0 +1,8 @@
+not stable from run to run
+
+defringe's local-average mode reuses, for a pixel it corrects only
+because a neighbor is above the threshold, the average its OpenMP thread
+computed last. Which pixel that was depends on how the rows were spread
+over the threads, so a few pixels near edges change between runs, within
+the tolerance (max dE 0.93 on GitHub's runners). The module is deprecated
+and its output is left as it is, see darktable-org/darktable#22723.

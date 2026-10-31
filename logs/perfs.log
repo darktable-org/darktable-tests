@@ -30684,3 +30684,9 @@ backtrace written to /tmp/darktable_bt_EWZ5V3.txt
 2026-10-31 05:51:09,"0187-agx-sdr-follow-cpu",5.80
 2026-10-31 05:51:16,"0188-agx-hlg-legacy-cpu",6.09
 2026-10-31 05:51:23,"0189-agx-hlg-follow-cpu",7.41
+2026-10-31 16:45:23,"0190-tonecurve-lab-last-node-cpu",2.67
+2026-10-31 16:45:35,"0190-tonecurve-lab-last-node-gpu",11.79
+2026-10-31 16:45:51,"0190-tonecurve-lab-last-node-cpu",2.47
+2026-10-31 16:45:54,"0190-tonecurve-lab-last-node-gpu",2.56
+2026-10-31 16:46:24,"0190-tonecurve-lab-last-node-cpu",2.56
+2026-10-31 16:46:27,"0190-tonecurve-lab-last-node-gpu",2.64

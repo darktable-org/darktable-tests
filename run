@@ -17,6 +17,10 @@
 #   --disable-timing           - do not output timing
 #   --no-deltae                - do a light check not requiring Delta-E module
 #   --fast-fail                - abort testing on the first NOK test
+#   --diffstat[=<max>]         - run the OpenCL path with --opencl-diffstat and
+#                                warn about modules whose normalized max CPU vs
+#                                OpenCL difference is above <max> (default 1e-4);
+#                                disables timing as the CPU code runs twice
 #   --op=<n> | --operation=<n> - run test with matching operation n
 
 CDPATH=
@@ -111,6 +115,10 @@ DO_DELTAE=yes
 DO_FAST_FAIL=no
 DO_GDB=no
 DO_GDB_CL=no
+DO_DIFFSTAT=no
+DIFFSTAT_MAX=1e-4
+DIFFSTAT_TESTS=()
+CALL_STDOUT=/dev/null
 
 mkdir -p $LOGDIR
 
@@ -136,10 +144,12 @@ function call()
     if [[ $FIRST == gdb ]]; then
         "$@" 2> /dev/null
     else
-        TIME=$( { time "$@" 1> /dev/null; } 2>&1 )
+        TIME=$( { time "$@" 1> "$CALL_STDOUT"; } 2>&1 )
         res=$?
 
-        echo "$(date +'%Y-%m-%d %H:%M:%S'),\"${TEST}-${CL}\",$TIME" >> "$PERF_LOG"
+        # diffstat runs the CPU code a second time, so its timing is meaningless
+        [[ $DO_DIFFSTAT == no ]] &&
+            echo "$(date +'%Y-%m-%d %H:%M:%S'),\"${TEST}-${CL}\",$TIME" >> "$PERF_LOG"
         [[ $DO_TIMING == yes ]] &&
             e "      Timing $CL ${TIME}s"
         return $res
@@ -190,6 +200,15 @@ while [[ $# -gt 0 ]]; do
             ;;
         --fast-fail)
             DO_FAST_FAIL=yes
+            ;;
+        --diffstat)
+            DO_DIFFSTAT=yes
+            DO_TIMING=no
+            ;;
+        --diffstat=*)
+            DO_DIFFSTAT=yes
+            DO_TIMING=no
+            DIFFSTAT_MAX=${1#*=}
             ;;
         --op|--operation)
             shift
@@ -293,7 +312,7 @@ for dir in $TESTS; do
 
             # Remove previous output and diff if any
 
-            rm -f output*.png diff*.png
+            rm -f output*.png diff*.png diffstat.log
 
             # Create the output
             #
@@ -341,11 +360,18 @@ for dir in $TESTS; do
 
 
             if [[ $DO_OPENCL == yes ]]; then
+                DIFFSTAT_OPTION=""
+                if [[ $DO_DIFFSTAT == yes ]]; then
+                    DIFFSTAT_OPTION="--opencl-diffstat"
+                    CALL_STDOUT=diffstat.log
+                fi
+
                 call $dir gpu $GDB_CLI_CL $CLI --width 2048 --height 2048 \
                      --hq true --apply-custom-presets false \
                      "$TEST_IMAGES/$IMAGE" "$TEST.xmp" output-cl.png \
-                     --core $CORE_OPTIONS $config
+                     --core $CORE_OPTIONS $config $DIFFSTAT_OPTION
                 res=$((res + $?))
+                CALL_STDOUT=/dev/null
 
                 if [[ $res != 0 ]]; then
                     echo "========== COMMAND fails"
@@ -467,6 +493,27 @@ for dir in $TESTS; do
 
             [[ $DO_FAST_FAIL == yes ]] && break;
         fi
+
+        # a warning only: most tests have some module above 1e-6 today
+        if [[ $DO_DIFFSTAT == yes ]] && [[ -f $dir/diffstat.log ]]; then
+            HIGH=$(awk -v limit="$DIFFSTAT_MAX" '
+                /OpenCL diff stats/ {
+                    for(i = 1; i <= NF; i++) {
+                        if($i ~ /^\(/) module = $(i - 2)
+                        if($i ~ /^max=/) max = substr($i, 5)
+                    }
+                    if(max + 0 > limit + 0) printf "%s max=%s\n", module, max
+                }' $dir/diffstat.log)
+
+            if [[ -n $HIGH ]]; then
+                while read -r line; do
+                    e "      OpenCL diffstat above $DIFFSTAT_MAX: $line"
+                done <<< "$HIGH"
+                DIFFSTAT_TESTS+=($dir)
+            else
+                e "      OpenCL diffstat: all modules below $DIFFSTAT_MAX"
+            fi
+        fi
     fi
 
     e
@@ -481,12 +528,19 @@ if [[ $TEST_ERROR -gt 0 ]]; then
     done
 fi
 
-./check-performance
+if [[ $DO_DIFFSTAT == yes ]]; then
+    e "OpenCL diffstat above $DIFFSTAT_MAX in ${#DIFFSTAT_TESTS[@]} tests"
+    for D in "${DIFFSTAT_TESTS[@]}"; do
+        e "   - $D (see $D/diffstat.log)"
+    done
+else
+    ./check-performance
 
-if [[ $? == 1 ]]; then
-    echo
-    e "Performance regressions:"
-    cat $PERF_ANALYZE
+    if [[ $? == 1 ]]; then
+        echo
+        e "Performance regressions:"
+        cat $PERF_ANALYZE
+    fi
 fi
 
 echo "see $(basename $LOG)"

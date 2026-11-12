@@ -66,6 +66,9 @@ Options:
 --disable-timing           do not output timing
 --no-deltae                light check, does not need the delta-E module
 --fast-fail                stop on the first failing test
+--diffstat[=<max>]         run the OpenCL path with --opencl-diffstat, warn about
+                           modules whose normalized max difference is above <max>
+                           (default 1e-4), no timing
 --op=<n> | --operation=<n> run the tests with matching operation n
 --gdb | --gdb-cl           run the CPU / OpenCL path under gdb
 ```

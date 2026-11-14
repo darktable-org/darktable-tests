@@ -24,6 +24,12 @@
 #define MAX_DELTA_E 2.3
 #define MAX_AVG_DELTA_E (MAX_DELTA_E / 3.0)
 
+/* DELTAE_ABOVE_PERCENT, when set, replaces the max delta-E condition: up to
+   that percentage of the pixels may reach MAX_DELTA_E. CI uses it, where a
+   few isolated pixels differ from expected.png from floating point
+   differences between machines. The nightly run keeps the max: a regression
+   on mask edges once showed only on 0.02% of the pixels */
+
 #define DEG2RAD 0.017453292519943295
 #define POW25_7 6103515625.0 /* 25^7, appears in the CIEDE2000 weights */
 
@@ -344,7 +350,12 @@ int main(int argc, char **argv)
   printf("      ----------------------------------\n");
   printf("      Pixels above tolerance   : %.2f %%\n", (double)above / num * 100.0);
 
-  if(maxde > MAX_DELTA_E || mean > MAX_AVG_DELTA_E)
+  const char *above_percent = getenv("DELTAE_ABOVE_PERCENT");
+  const int too_far = above_percent && *above_percent
+    ? (double)above / num * 100.0 > atof(above_percent)
+    : maxde > MAX_DELTA_E;
+
+  if(too_far || mean > MAX_AVG_DELTA_E)
     return 2;
   if(maxde < 0.01)
     return 0;

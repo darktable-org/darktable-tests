@@ -37,7 +37,9 @@ A test directory contains:
 | `test.sh`          | optional, replaces the default driver, returns 0 if OK  |
 
 A test passes when the max delta-E against `expected.png` stays below 2.3
-(and the average below 2.3/3).
+(and the average below 2.3/3). With `DELTAE_ABOVE_PERCENT` set, as in CI,
+the max is replaced by a share of the pixels: a test passes when no more
+than that percentage of its pixels reach 2.3.
 
 ### Requirements
 

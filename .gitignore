@@ -1,5 +1,6 @@
 diff*png
 output*png
+diffstat.log
 logs/
 .venv/
 

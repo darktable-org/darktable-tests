@@ -73,6 +73,10 @@ Options:
 --gdb | --gdb-cl           run the CPU / OpenCL path under gdb
 ```
 
+For `--diffstat` use a RelWithDebInfo build of darktable. A Release build
+compiles the CPU code with `-ffast-math`, and that alone puts several
+modules, demosaic in most tests, above 1e-4.
+
 Every run writes `logs/test-<date>.log`, appends the timings to
 `logs/perfs.log` and finally reports timing regressions. To review the
 failures of a run:
